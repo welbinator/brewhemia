@@ -278,7 +278,7 @@ nav {
     justify-content: center;
     background: black;
     z-index: 1;
-    
+    top: 100px;
 }
 nav ul {
     display: flex;
