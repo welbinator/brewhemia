@@ -26,7 +26,7 @@ header {
     width: 100vw;
     height: 100px;
     position: fixed;
-    top: 0;
+    top: 100px;
     left: 0;
     background: black;
 }
@@ -278,7 +278,7 @@ nav {
     justify-content: center;
     background: black;
     z-index: 1;
-    top: 100px;
+    top: 0px;
 }
 nav ul {
     display: flex;
