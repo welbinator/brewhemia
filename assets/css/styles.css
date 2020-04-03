@@ -33,7 +33,7 @@ header {
 }
 .logo {
     margin: 20px;
-    width: 50%;
+    /* width: 50%; */
     display: inline-block;
 }
 .logo h1 {
