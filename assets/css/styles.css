@@ -286,3 +286,8 @@ nav ul {
 }
 
 }
+@media screen and (min-width: 1380px) {
+    .container {
+        width: 900px;
+    }
+}
