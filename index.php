@@ -6,9 +6,9 @@
     <section class="features">
         <div class="container">
         <div class="features-container">
-            <div class="feature"><img src="assets/images/bottles-dark.jpg"><h2><a href="/about">ABOUT US</a></h2></div>
-            <div class="feature"><img src="assets/images/grilled-cheese-and-soup-thumb.jpg"><h2><a href="/menu">MENU</a></h2></div>
-            <div class="feature"><img src="assets/images/vinyl-night3.jpg"><h2><a href="/events">EVENTS</a></h2></div>
+            <div class="feature"><img src="assets/images/bottles-dark.jpg"><h2><a href="/about-us.php">ABOUT US</a></h2></div>
+            <div class="feature"><img src="assets/images/grilled-cheese-and-soup-thumb.jpg"><h2><a href="/menu.php">MENU</a></h2></div>
+            <div class="feature"><img src="assets/images/vinyl-night3.jpg"><h2><a href="/events.php">EVENTS</a></h2></div>
         </div>
     </div><!-- container -->
     </section>
