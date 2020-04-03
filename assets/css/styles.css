@@ -274,7 +274,7 @@ nav {
     background: transparent;
     display: flex;
     justify-content: center;
-    background: black;
+    /* background: black; */
     z-index: 1;
     
 }
