@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+    height: 100%;
+}
+body {
+    background: black;
+    color: white;
+    font-family: PT Sans, sans-serif;
+    height: 100%;
+}
+
+
+header {
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: black;
+}
+.logo {
+    margin: 20px;
+    width: 50%;
+    display: inline-block;
+}
+
+nav {
+   
+    width: 200px;
+    height: 100vh;
+    background: black;
+    position: absolute;
+    right: 0; 
+    transform: translateX(100%); 
+    transition: transform .5s ease-in-out;
+
+    
+}
+
+
+
+nav ul {
+    list-style: none;
+    
+    
+}
+
+nav ul li {
+    margin: 20px;
+}
+nav ul li a{
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+.menu-icon {
+    width: 30px;
+   
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 30px;
+}
+.menu-icon img {
+    width: 100%;
+}
+
+section.hero {
+    /* position: relative; */
+    margin-top: 100px;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+section.hero img {
+    width: 100%;
+    object-fit: cover;
+    /* position:absolute; */
+}
+section.about-hero, section.contact-hero, section.menu-hero {
+    margin-top: 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 60vh;
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+}
+
+section.about-hero {
+    background-image:url("../images/brewhemia-bar-thin-dark.jpg");
+   
+}
+
+section.about-hero h2, section.contact-hero h2, section.menu-hero h2 {
+    font-size: 60px;
+}
+
+section.contact-hero {
+    background-image:url("../images/brewhemia-interior2.jpg");
+}
+
+section.menu-hero {
+    background-image:url("../images/menu-hero22.jpg");
+}
+
+
+section.features, .menu, .contact {
+    background: white;
+
+}
+
+section.menu {
+   padding: 100px;
+}
+.features-container {
+    width: 90%;
+    margin: auto;
+    padding: 50px 0;
+    display: flex;
+    justify-content: space-around;
+}
+.feature {
+    margin: 10px;
+    
+    /* position: relative; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.feature img {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.feature h2 {
+    position: absolute;
+    text-align: center;
+    
+}
+.feature h2 a {
+    color: white;
+    text-decoration: none;
+}
+section.tagline {
+    padding: 20px;
+}
+section.tagline p{
+    text-align:center;
+    font-size:18px;
+    font-weight: bold;
+}
+
+section.about {
+    background: white;
+}
+
+footer {
+    background: #232323;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100vw;
+}
+footer h3 {
+    text-align: center;
+    border-bottom: 2px solid white;
+}
+footer p {
+    margin: 10px;
+}
+footer a {
+    color: white;
+    text-decoration: none;
+}
+.hours, .connect, .address {
+    margin: 40px auto;
+    padding: 20px;
+    
+}
+
+
+.hour {
+    display: flex;  
+    justify-content: space-between;
+    margin: 10px 0;
+}
+ .online {
+    display: block;
+    color: white;
+    text-decoration: none;
+    background: red;
+    padding: 10px 20px;
+    margin: 15px auto;    
+    width: 200px;
+    text-align: center;
+    
+}
+.address a {
+    color: white;
+    text-decoration: none;
+}
+.copyright p {
+    font-weight: normal; 
+    text-align: center;
+}
+
+
+/* DESKTOP STYLES */
+
+@media screen and (min-width: 768px) {
+
+ .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-width: 728px;
+    max-width: 900px;
+    margin: auto;
+}
+.about-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 50px;
+}
+.about-inner p, .contact-inner p, .contact-inner h3 {
+    margin: 40px;
+    color: black;
+}
+ .contact-inner h3 {
+     border-bottom: 1px solid black;
+     padding-bottom: 15px;
+ }
+   
+.menu-icon {
+    /* display: none; */
+    z-index: 0;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav {
+    transform: translate(0);
+    width: 75%;
+    height: 100px;
+    background: transparent;
+    display: flex;
+    justify-content: flex-end;
+    background: black;
+    z-index: 1;
+    
+}
+nav ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+
+}
