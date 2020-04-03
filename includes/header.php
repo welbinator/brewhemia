@@ -11,7 +11,7 @@
 <body>
     <header>
     <div class="container">
-        <div class="logo"><h1>BREWHEMIA</h1></div>
+        <div class="logo"><h1><a href="http://brewhemia.com">BREWHEMIA</a></h1></div>
         <nav id="nav" class="show-nav">
             <ul>
                 
