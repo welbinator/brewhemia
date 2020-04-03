@@ -51,7 +51,10 @@ nav {
     
 }
 
-
+.nav-online {
+    background: red;
+    padding: 10px 15px;
+}
 
 nav ul {
     list-style: none;

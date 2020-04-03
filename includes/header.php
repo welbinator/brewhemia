@@ -14,10 +14,11 @@
         <div class="logo"><h1>BREWHEMIA</h1></div>
         <nav id="nav" class="show-nav">
             <ul>
-                <li><a href="/">Home</a></li>
+                
                 <li><a href="/about-us.php">About Us</a></li>
                 <li><a href="/menu.php">Menu</a></li>
                 <li><a href="/contact-us.php">Contact Us</a></li>
+                <li><a class="nav-online" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">ORDER ONLINE</a></li>
                 
             </ul>
         </nav>
