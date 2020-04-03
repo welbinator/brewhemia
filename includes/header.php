@@ -10,6 +10,7 @@
 </head>
 <body>
     <header>
+    <div class="container">
         <div class="logo"><h1>BREWHEMIA</h1></div>
         <nav id="nav" class="show-nav">
             <ul>
@@ -21,4 +22,5 @@
             </ul>
         </nav>
         <div class="menu-icon"><img id="mobile-icon" src="assets/images/menu-icon.png"></div>
+        </div>
     </header>
