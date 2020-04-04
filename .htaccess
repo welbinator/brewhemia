@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^(index|contact-us|about-us|menu|events)$ $1.php [NC,L]

@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;700;800&display=swap');
 @import url('../fonts/Myriad-Pro-Regular.otf')
 @font-face {
     font-family: Myriad Pro;
@@ -10,6 +10,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+.fa {
+    font-size: 22px!important;
 }
 html {
     height: 100%;
@@ -101,6 +104,7 @@ section.hero {
 }
 section.hero img {
     width: 100%;
+    height: 483px;
     object-fit: cover;
     /* position:absolute; */
 }
@@ -176,7 +180,7 @@ section.tagline {
 }
 section.tagline p{
     text-align:center;
-    font-size:18px;
+    font-size:22px;
     font-weight: bold;
 }
 
@@ -186,16 +190,19 @@ section.about {
 
 footer {
     background: #232323;
-    font-size: 18px;
+   
     font-weight: bold;
     width: 100vw;
 }
 footer h3 {
     text-align: center;
     border-bottom: 2px solid white;
+    font-size: 18px;
+    font-weight: 800;
 }
 footer p {
-    margin: 10px;
+    margin: 16px;
+    font-size: 16px;
 }
 footer a {
     color: white;
@@ -242,8 +249,9 @@ footer a {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    min-width: 728px;
-    max-width: 900px;
+    /* min-width: 728px;
+    max-width: 1200px; */
+    width: 900px;
     margin: auto;
 }
 .about-inner {
@@ -262,27 +270,29 @@ footer a {
  }
    
 .menu-icon {
-    /* display: none; */
+    display: none;
     z-index: 0;
 }
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
+
 .logo {
     z-index: 2;
 }
 nav {
     transform: translate(0);
-    width: 75%;
+    /* width: 75%; */
     height: 100px;
     background: transparent;
     display: flex;
     justify-content: center;
     background: black;
     z-index: 1;
-    top: 0px;
+    min-width: 550px;
+    position: static;
 }
 nav ul {
     display: flex;
@@ -290,10 +300,11 @@ nav ul {
     align-items: center;
     
 }
+.footer-section {
+    width: 33%;
+}
 
 }
 @media screen and (min-width: 1380px) {
-    .container {
-        width: 900px;
-    }
+   
 }
