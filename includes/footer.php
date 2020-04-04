@@ -14,7 +14,7 @@
         <div class="connect">
             <h3>CONNECT</h3>
             <div class="connect-inner"> 
-                <p><i class="fa fa-facebook-square"></i> <a target="_blank" href="https://web.archive.org/web/20191001193057/https://www.facebook.com/Brewhemia">Like our page!</a></p>
+                <p><i class="fa fa-facebook-square"></i> <a target="_blank" href="https://www.facebook.com/Brewhemia">Like our page!</a></p>
                 <p><i class="fa fa-envelope"></i> info@brewhemia.com </p>
                 <p><img src="../assets/images/mobile.svg" style="color: white; height: 25px;"></i> (319) 364-0802</p>
             </div>
