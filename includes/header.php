@@ -10,6 +10,8 @@
     <meta property="og:image" content="http://brewhemia.com/assets/images/brewhemia-og.jpg" />
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
     <title>Document</title>
+
+    <?php include "includes/analytics.php" ?>
 </head>
 <body>
     <header>
