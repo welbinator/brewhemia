@@ -23,6 +23,11 @@ body {
     font-family: 'Myriad Pro', 'Merriweather Sans', arial, sans-serif!important;
     height: 100%;
 }
+/* .dark {
+    color: black;
+   
+} */
+
 
 
 header {
@@ -127,6 +132,20 @@ section.about-hero h2, section.contact-hero h2, section.menu-hero h2 {
     font-size: 60px;
 }
 
+.about-inner {
+    display: flex;
+    flex-direction: column-reverse;
+}
+.about-inner p, .contact-inner p, .contact-inner h3 {
+    margin: 40px;
+    color: black;
+}
+.about-inner img {
+    object-fit: cover;
+}
+.about-text {
+    padding: 50px 10px;
+}
 section.contact-hero {
     background-image:url("../images/brewhemia-interior2.jpg");
 }
@@ -259,6 +278,7 @@ footer a {
     align-items: center;
     justify-content: space-around;
     margin: 50px;
+    flex-direction: row;
 }
 .about-inner p, .contact-inner p, .contact-inner h3 {
     margin: 40px;
