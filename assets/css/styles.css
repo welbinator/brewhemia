@@ -239,7 +239,15 @@ section.tagline p {
 section.about {
 	background: white;
 }
-
+section.ad {
+	display: flex;
+	justify-content: center;
+	background: white;
+	padding: 20px;
+}
+.ad img {
+	max-width: 100%;
+}
 footer {
 	background: #232323;
 
@@ -304,9 +312,7 @@ footer a {
 		margin: auto;
 	}
 	section.hero img {
-		
 		height: 774px;
-		
 	}
 	.about-inner {
 		display: flex;
@@ -325,7 +331,6 @@ footer a {
 		border-bottom: 1px solid black;
 		padding-bottom: 15px;
 	}
-
 
 	.menu-icon {
 		display: none;
