@@ -18,7 +18,7 @@
                 <p><i class="fa fa-envelope"></i> <a target="_blank" href="mailto:info@brewhemia.com">info@brewhemia.com</a></p>
                 <p><img src="../assets/images/mobile.svg" style="color: white; height: 25px;"></i> (319) 364-0802</p>
             </div>
-            <a class="online" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">ORDER ONLINE</a>
+            <a class="online pulsate-bck" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">ORDER ONLINE</a>
             <a class="online" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101/giftcards">BUY GIFT CARDS</a>
         </div>
         </div><!-- footer-section -->

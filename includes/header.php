@@ -31,7 +31,7 @@
                 <li><a href="/about-us">About Us</a></li>
                 <li><a href="/menu">Menu</a></li>
                 <li><a href="/contact-us">Contact Us</a></li>
-                <li><a class="nav-online" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">ORDER ONLINE</a></li>
+                <li class="pulsate-bck"><a class="nav-online" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">ORDER ONLINE</a></li>
                 
             </ul>
         </nav>
