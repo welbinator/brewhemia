@@ -96,7 +96,7 @@ section.hero {
 }
 section.hero img {
 	width: 100%;
-	height: 774px;
+	height: 300px;
 	object-fit: cover;
 	/* position:absolute; */
 }
@@ -138,7 +138,7 @@ section.covid {
 }
 .covid-inner h3 {
 	text-align: center;
-	font-size: 38px;
+	font-size: 30px;
 	color: #2d2d2d;
 	margin-bottom: 20px;
 }
@@ -146,6 +146,9 @@ section.covid {
 	color: #2d2d2d;
 	font-size: 24px;
 	line-height: 30px;
+}
+.covid-inner a:visited {
+	color: blue;
 }
 .covid-inner .bold {
 	font-weight: 800;
@@ -299,6 +302,11 @@ footer a {
 		width: 900px;
 		margin: auto;
 	}
+	section.hero img {
+		
+		height: 774px;
+		
+	}
 	.about-inner {
 		display: flex;
 		align-items: center;
@@ -316,6 +324,7 @@ footer a {
 		border-bottom: 1px solid black;
 		padding-bottom: 15px;
 	}
+
 
 	.menu-icon {
 		display: none;
@@ -349,6 +358,47 @@ footer a {
 	}
 	.footer-section {
 		width: 33%;
+	}
+
+	section.covid {
+		background: white;
+		padding: 50px 20px 1px 20px;
+	}
+	.covid-inner {
+		width: 50%;
+		min-width: 750px;
+		margin: auto;
+	}
+	.covid-inner ul,
+	.covid-inner ol {
+		margin-left: 30px;
+		font-size: 24px;
+		color: #2d2d2d;
+	}
+	.covid-inner h3 {
+		text-align: center;
+		font-size: 38px;
+		color: #2d2d2d;
+		margin-bottom: 20px;
+	}
+	.covid-inner p {
+		color: #2d2d2d;
+		font-size: 24px;
+		line-height: 30px;
+	}
+	.covid-inner .bold {
+		font-weight: 800;
+
+		margin-bottom: 2px;
+	}
+	.covid-inner hr {
+		margin-bottom: 33px;
+		width: 40%;
+		margin-left: 10px;
+	}
+	hr.covid-rule {
+		margin: 50px;
+		border: 2px solid dimgrey;
 	}
 }
 @media screen and (max-width: 1024px) {
