@@ -23,7 +23,7 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <header>
-    <div class="container">
+    <!-- <div class="container"> -->
         <div class="logo"><h1><a href="http://brewhemia.com">BREWHEMIA</a></h1></div>
         <nav id="nav" class="show-nav">
             <ul>
@@ -36,5 +36,5 @@
             </ul>
         </nav>
         <div class="menu-icon"><img id="mobile-icon" src="assets/images/menu-icon.png"></div>
-        </div>
+        <!-- </div> -->
     </header>

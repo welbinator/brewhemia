@@ -124,12 +124,15 @@ section.menu-hero h2 {
 }
 section.covid {
 	background: white;
-	padding: 50px 20px 1px 20px;
+	/* padding: 50px 20px 1px 20px; */
+	overflow-x: hidden;
 }
 .covid-inner {
 	width: 50%;
 	min-width: 750px;
 	margin: auto;
+	overflow-x: hidden;
+	padding: 20px;
 }
 .covid-inner ul,
 .covid-inner ol {
