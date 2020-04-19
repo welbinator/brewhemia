@@ -27,7 +27,7 @@
 
 <p class="bold">How Do I Order?</p><br>
 <ol>
-<li>Online: <a class="how-to-order" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101</a></li>
+<li>Online: <a id="how-to-order" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101</a></li>
 <li>By phone: 319-364-0802</li>
 <li>Email larger orders in advance to info@brewhemia.com</li>
 <li>Message on Facebook: <a href="https://www.facebook.com/Brewhemia">https://www.facebook.com/Brewhemia</a></li>
