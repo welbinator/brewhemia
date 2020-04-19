@@ -16,10 +16,10 @@
 <p>Keep and eye out for our Friday Specials!</p><br><hr>
 
 <p class="bold">Where do I order?</p>
-<p><strong>CLICK HERE:</strong> <a href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101</a></p><br><hr>
+<p><strong>CLICK HERE:</strong> <a class="where-to-order" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101</a></p><br><hr>
 
 <p class="bold">Want to Schedule Your Meal for Monday at NOON? WE CAN DO THAT!</p>
-<p><strong>CLICK HERE:</strong> <a href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101</a></p><br><hr>
+<p><strong>CLICK HERE:</strong> <a class="schedule-order" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101</a></p><br><hr>
 
 <p class="bold">I want to send a gift to a pal, do you have gift cards?</p>
 <p class="bold">Yes! And they are digitally delivered, so your friend can use it instantly! </p>
@@ -27,7 +27,7 @@
 
 <p class="bold">How Do I Order?</p><br>
 <ol>
-<li>Online: <a href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101</a></li>
+<li>Online: <a class="how-to-order" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101</a></li>
 <li>By phone: 319-364-0802</li>
 <li>Email larger orders in advance to info@brewhemia.com</li>
 <li>Message on Facebook: <a href="https://www.facebook.com/Brewhemia">https://www.facebook.com/Brewhemia</a></li>
