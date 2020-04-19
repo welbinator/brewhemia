@@ -18,7 +18,7 @@
 <p class="bold">Where do I order?</p>
 <p><strong>CLICK HERE:</strong> <a id="where-to-order" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101</a></p><br><hr>
 
-<p class="bold">Want to Schedule Your Meal for Monday at NOON? WE CAN DO THAT!</p>
+<p class="bold">Want to Schedule Your Meal for Wednesday at NOON? WE CAN DO THAT!</p>
 <p><strong>CLICK HERE:</strong> <a id="schedule-order" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101</a></p><br><hr>
 
 <p class="bold">I want to send a gift to a pal, do you have gift cards?</p>
@@ -73,6 +73,9 @@
     <li>our baristas are staying safe at home.</li>
     <li>B)  We are trying to reduce the number of small transactions to reduce touch points.  </li>
     </ul><br><hr>
+
+<p class="bold">Are you giving away toilet paper?</p>
+<p>Yes, there is a bin in the front. If your order is over $25, grab a roll!</p><br><hr>
 
     <p>Sincere Thank You, <br>
 
