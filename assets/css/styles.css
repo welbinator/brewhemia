@@ -128,6 +128,7 @@ section.menu-hero h2 {
 	/* margin-top: 50%; */
 	position: absolute;
 	font-size: 4em;
+	font-size: clamp(calc(100vw / 25.5), 4em, 1.6em);
 	z-index: 1;
 }
 section.covid {
