@@ -2,6 +2,7 @@
     
 
     <section class="hero">
+    <h2>Open for Carryout and Delivery</h2>
         <img src="assets/images/brewhemia-hero.jpg">
     </section>
         

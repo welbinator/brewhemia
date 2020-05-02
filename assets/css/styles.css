@@ -94,11 +94,13 @@ section.hero {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	background: black;
 }
 section.hero img {
 	width: 100%;
 	height: 300px;
 	object-fit: cover;
+	opacity: 0.6;
 	/* position:absolute; */
 }
 section.about-hero,
@@ -121,6 +123,12 @@ section.about-hero h2,
 section.contact-hero h2,
 section.menu-hero h2 {
 	font-size: 60px;
+}
+.hero h2 {
+	/* margin-top: 50%; */
+	position: absolute;
+	font-size: 4em;
+	z-index: 1;
 }
 section.covid {
 	background: white;
@@ -317,6 +325,7 @@ footer a {
 	section.hero img {
 		height: 774px;
 	}
+
 	.about-inner {
 		display: flex;
 		align-items: center;
