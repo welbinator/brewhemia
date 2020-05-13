@@ -3,11 +3,11 @@
 
         <div class="footer-section">
         <div class="hours">
-            <h3>HOURS</h3>
-            <div class="hour"><div class="day">Mon - Thurs</div><div class="time">7am-6pm</div></div>
-            <div class="hour"><div class="day">Fri</div><div class="time">7am-6pm</div></div>
-            <div class="hour"><div class="day">Sat</div><div class="time">8am-6pm</div></div>
-            <div class="hour"><div class="day">Sun</div><div class="time">8am-5pm</div></div>
+            <h3>Temporary HOURS</h3>
+            <div class="hour"><div class="day">Mon - Tues</div><div class="time">Closed</div></div>
+            <div class="hour"><div class="day">Wed - Sun</div><div class="time">8am - 2pm</div></div>
+            <!-- <div class="hour"><div class="day">Sat</div><div class="time">8am-6pm</div></div>
+            <div class="hour"><div class="day">Sun</div><div class="time">8am-5pm</div></div> -->
         </div>
         </div><!-- footer-section -->
         <div class="footer-section">
