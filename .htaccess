@@ -1,2 +1,2 @@
 RewriteEngine on
-RewriteRule ^(index|contact-us|about-us|menu|events)$ $1.php [NC,L]
+RewriteRule ^(index|contact-us|about-us|menu|events|catering)$ $1.php [NC,L]

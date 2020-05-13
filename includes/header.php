@@ -23,18 +23,19 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <header>
-    <!-- <div class="container"> -->
+   <div class="container">
         <div class="logo"><h1><a href="http://brewhemia.com">BREWHEMIA</a></h1></div>
         <nav id="nav" class="show-nav">
             <ul>
                 
                 <li><a href="/about-us">About Us</a></li>
                 <li><a href="/menu">Menu</a></li>
+                <li><a href="/catering">Catering</a></li>
                 <li><a href="/contact-us">Contact Us</a></li>
                 <li class="pulsate-bck"><a class="nav-online" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">ORDER ONLINE</a></li>
                 
             </ul>
         </nav>
         <div class="menu-icon"><img id="mobile-icon" src="assets/images/menu-icon.png"></div>
-        <!-- </div> -->
+        </div>
     </header>

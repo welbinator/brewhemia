@@ -63,8 +63,8 @@
 <p class="bold">Why is it important that Brewhemia stay open? Why not close and wait it out?</p>
 <p>Reality: We have bills to pay.  We also really really want to stay connected to our customers. </p><br><hr>
 
-<p class="bold">Bulk Coffee Drinks: </p>
-<p>Without a barista consistently on the schedule we still make a mean line of Cold Brew beverages”: Classic cold brew, Thai coffee and our famous Bohemian are offered in an Economy size for you to enjoy from your place of confinement. </p> <br><hr> 
+<!-- <p class="bold">Bulk Coffee Drinks: </p>
+<p>Without a barista consistently on the schedule we still make a mean line of Cold Brew beverages”: Classic cold brew, Thai coffee and our famous Bohemian are offered in an Economy size for you to enjoy from your place of confinement. </p> <br><hr>  -->
 
 <!-- <p class="bold">About Single Serving Coffee</p>
 <p class="bold">We currently aren’t doing single coffee beverages for a couple of reasons: </p>

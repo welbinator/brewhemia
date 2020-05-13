@@ -111,7 +111,8 @@ section.hero img {
 }
 section.about-hero,
 section.contact-hero,
-section.menu-hero {
+section.menu-hero,
+section.catering-hero {
 	margin-top: 100px;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -124,10 +125,14 @@ section.menu-hero {
 section.about-hero {
 	background-image: url("../images/brewhemia-bar-thin-dark.jpg");
 }
+section.catering-hero {
+	background-image: url("../images/brewhemia_catering.jpg");
+}
 
 section.about-hero h2,
 section.contact-hero h2,
-section.menu-hero h2 {
+section.menu-hero h2,
+section.catering-hero h2 {
 	font-size: 60px;
 }
 .hero h2 {
@@ -318,13 +323,20 @@ footer a {
 
 /* DESKTOP STYLES */
 
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) { */
+
+@media screen and (min-width: 968px) {
 	.container {
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-start;
-		/* min-width: 728px;
-    max-width: 1200px; */
+
+		width: 1000px;
+		margin: auto;
+	}
+	header .container {
+		display: flex;
+		justify-content: space-around;
 		width: 1000px;
 		margin: auto;
 	}
@@ -364,7 +376,7 @@ footer a {
 	}
 	nav {
 		transform: translate(0);
-		/* width: 75%; */
+		width: 100%;
 		height: 100px;
 		background: transparent;
 		display: flex;
