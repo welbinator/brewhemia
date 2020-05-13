@@ -17,6 +17,9 @@ html {
 	height: 100%;
 	overflow-x: hidden;
 }
+p {
+	font-size: 20px;
+}
 body {
 	background: black;
 	color: white;
@@ -31,6 +34,9 @@ header {
 	left: 0;
 	background: black;
 	z-index: 2;
+}
+.dark {
+	color: black;
 }
 .logo {
 	margin: 20px;
@@ -185,7 +191,6 @@ hr.covid-rule {
 .contact-inner p,
 .contact-inner h3 {
 	margin: 40px;
-	color: black;
 }
 .about-inner img {
 	object-fit: cover;
@@ -320,7 +325,7 @@ footer a {
 		align-items: flex-start;
 		/* min-width: 728px;
     max-width: 1200px; */
-		width: 900px;
+		width: 1000px;
 		margin: auto;
 	}
 	section.hero img {
@@ -338,7 +343,6 @@ footer a {
 	.contact-inner p,
 	.contact-inner h3 {
 		margin: 40px;
-		color: black;
 	}
 	.contact-inner h3 {
 		border-bottom: 1px solid black;
