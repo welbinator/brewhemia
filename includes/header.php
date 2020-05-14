@@ -12,7 +12,7 @@
     <meta property="og:title" content="Brewhemia - Family owned cafe in NewBo Cedar Rapids" />
     <meta property="og:image" content="http://brewhemia.com/assets/images/brewhemia-og.jpg" />
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
-    <title>Document</title>
+    <title>Brewhemia</title>
 
    
 </head>

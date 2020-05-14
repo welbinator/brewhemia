@@ -141,6 +141,7 @@ section.catering-hero h2 {
 	font-size: 4em;
 	font-size: clamp(calc(100vw / 25.5), 4em, 1.6em);
 	z-index: 1;
+	text-align: center;
 }
 section.covid {
 	background: white;
@@ -213,12 +214,15 @@ section.menu-hero {
 
 section.features,
 .menu,
-.contact {
+.contact,
+.catering {
 	background: white;
 }
 
-section.menu {
-	padding: 100px;
+section.menu,
+section.catering,
+section.contact {
+	padding: 100px 10px;
 }
 .features-container {
 	width: 90%;

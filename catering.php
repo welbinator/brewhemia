@@ -4,7 +4,7 @@
         <h2>Catering</h2>
 
     </section>
-    <section class="menu">
+    <section class="catering">
         <div class="container">
         <div class="catering-inner">
             <h2 class="dark" style="line-height: 40px;">Want to talk Catering, Coffee, Breakfast or Lunch for your office or event? Call/Text Andrea at <a style="text-decoration: none;color:black;" href="tel:3193893595">319-389-3595</a> or fill out this form below:</h2>
