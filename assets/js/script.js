@@ -1,7 +1,7 @@
 let showing = false;
 const nav = document.getElementById("nav");
 let activeMenuItems;
-let MenuItems = document.querySelectorAll("nav ul li");
+let menuItems = document.querySelectorAll("nav ul li");
 let num = 100;
 let increment;
 mobileMenuInit();
@@ -12,10 +12,12 @@ function mobileMenuInit() {
 	if (window.innerWidth < 969) {
 		console.log("small screen");
 		addNavActive();
-
 		menuAnimationOut();
+		// menuAnimationOut();
+		nav.style.WebkitTransform = "translateX(100%)";
 	} else {
 		console.log("big scren");
+		nav.style.WebkitTransform = "translate(0)";
 		removeNavActive();
 		menuAnimationIn();
 	}
@@ -30,6 +32,7 @@ function removeNavActive() {
 	nav.classList.remove("active");
 }
 
+function resetNav() {}
 document.getElementById("mobile-icon").addEventListener("click", function () {
 	if (showing == false) {
 		nav.style.WebkitTransform = "translate(0)";
@@ -50,8 +53,7 @@ document.getElementById("mobile-icon").addEventListener("click", function () {
 // menu animation
 
 function menuAnimationOut() {
-	console.log("out!");
-	console.log(activeMenuItems);
+	num = 100;
 	activeMenuItems.forEach((item) => {
 		increment = num + "%";
 		num += 20;
