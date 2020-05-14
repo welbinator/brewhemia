@@ -72,6 +72,7 @@ nav ul {
 
 nav ul li {
 	margin: 15px;
+	transition: 1.2s ease;
 }
 nav ul li a {
 	text-decoration: none;
