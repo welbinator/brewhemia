@@ -72,7 +72,12 @@ nav ul {
 }
 
 nav ul li {
+<<<<<<< HEAD
 	margin: 35px 15px;
+=======
+	margin: 15px;
+	transition: 1.2s ease;
+>>>>>>> menu-animation
 }
 nav ul li a {
 	text-decoration: none;
