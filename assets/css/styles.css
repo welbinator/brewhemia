@@ -93,7 +93,15 @@ nav ul li a {
 .menu-icon img {
 	width: 100%;
 }
-
+.menu-inner p {
+	line-height: 33px;
+}
+.menu-inner ul {
+	margin-left: 50px;
+}
+.menu-inner ul li {
+	line-height: 30px;
+}
 section.hero {
 	/* position: relative; */
 	margin-top: 100px;

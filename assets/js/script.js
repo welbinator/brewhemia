@@ -13,7 +13,7 @@ function mobileMenuInit() {
 		console.log("small screen");
 		addNavActive();
 		menuAnimationOut();
-		// menuAnimationOut();
+
 		nav.style.WebkitTransform = "translateX(100%)";
 	} else {
 		console.log("big scren");
