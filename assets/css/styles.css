@@ -168,7 +168,8 @@ section.covid {
 .covid-inner ul,
 .covid-inner ol {
 	margin-left: 30px;
-	font-size: 20px;
+	/* font-size: 20px; */
+	font-size: 18px;
 	color: #2d2d2d;
 }
 .covid-inner h3 {
@@ -179,7 +180,8 @@ section.covid {
 }
 .covid-inner p {
 	color: #2d2d2d;
-	font-size: 20px;
+	/* font-size: 20px; */
+	font-size: 18px;
 	line-height: 30px;
 }
 .covid-inner a:visited {
@@ -187,7 +189,7 @@ section.covid {
 }
 .covid-inner .bold {
 	font-weight: 800;
-
+font-size: 24px;
 	margin-bottom: 2px;
 }
 .covid-inner hr {
@@ -425,7 +427,8 @@ footer a {
 	.covid-inner ul,
 	.covid-inner ol {
 		margin-left: 30px;
-		font-size: 24px;
+		/* font-size: 24px; */
+		font-size: 18px;
 		color: #2d2d2d;
 	}
 	.covid-inner h3 {
@@ -436,7 +439,8 @@ footer a {
 	}
 	.covid-inner p {
 		color: #2d2d2d;
-		font-size: 24px;
+		/* font-size: 24px; */
+		font-size: 18px;
 		line-height: 30px;
 	}
 	.covid-inner .bold {

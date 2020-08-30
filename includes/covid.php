@@ -5,7 +5,8 @@
     <hr>
 
     <p class="bold">When Are You Open?</p>
-    <p>8-2 Every day.</p>
+    <p>8-2 Tuesday-Sunday.</p>
+    <p>Closed Mondays</p>
     <p>Easy No Contact Carry Out & Delivery</p><br>
     <hr>
 
