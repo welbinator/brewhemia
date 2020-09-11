@@ -14,7 +14,7 @@
  <p class="dark"><b>1202 3rd st. SE Cedar Rapids, IA 52401</b></p><br>
  <p class="dark"><b><a class="online" style="display:inline;" href="https://www.toasttab.com/brewhemia-1202-3rd-st-se-ste-101">ORDER ONLINE</a></b></p> <br>
  <p class="dark"><b>Carry out or delivery</b></p>
- <p class="dark"><b> 319-0364-0802</b></p><br><br>
+ <p class="dark"><b> 319-364-0802</b></p><br><br>
  <p class="dark"><b><u>Espresso</u></b></p>
  <p class="dark">Double espresso 2.45</p>
  <p class="dark">Americano (espresso/hot water) 2.50</p>
