@@ -149,7 +149,7 @@ section.catering-hero h2 {
 	/* margin-top: 50%; */
 	position: absolute;
 	font-size: 4em;
-	font-size: clamp(calc(100vw / 25.5), 4em, 1.6em);
+	font-size: clamp(calc(60vw / 25.5), 4em, 1.6em);
 	z-index: 1;
 	text-align: center;
 }
@@ -189,7 +189,7 @@ section.covid {
 }
 .covid-inner .bold {
 	font-weight: 800;
-font-size: 24px;
+	font-size: 24px;
 	margin-bottom: 2px;
 }
 .covid-inner hr {
@@ -200,6 +200,10 @@ font-size: 24px;
 hr.covid-rule {
 	margin: 50px;
 	border: 2px solid dimgrey;
+}
+section.main {
+	background: white;
+	color: black;
 }
 .about-inner {
 	display: flex;
