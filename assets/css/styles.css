@@ -264,6 +264,7 @@ section.contact {
 .feature h2 {
   position: absolute;
   text-align: center;
+  font-size: 3rem;
 }
 .feature h2 a {
   color: white;
@@ -348,6 +349,9 @@ footer a {
 @media screen and (min-width: 500px) {
   .features-container {
     flex-wrap: nowrap;
+  }
+  .feature h2 {
+    font-size: 2rem;
   }
 }
 
