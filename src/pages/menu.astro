@@ -1,0 +1,93 @@
+---
+import Base from "../layouts/Base.astro";
+
+const menus = [
+  { title: "Breakfast", img: "/images/breakfast-menu.jpg", note: "Burritos, biscuits & gravy, avocado toast — served til 2pm." },
+  { title: "Biscuits", img: "/images/biscuit-menu.jpg", note: "Scratch-made biscuits, sausage & shiitake gravy options." },
+  { title: "Lunch", img: "/images/lunch-menu.jpg", note: "Grilled cheese, sandwiches, soups & salads." },
+];
+---
+
+<Base
+  title="Menu"
+  bannerTitle="The Menu"
+  bannerKicker="Breakfast · Lunch · Bar"
+  bannerImage="/images/grilled-cheese-and-soup.jpg"
+>
+  <section class="menu">
+    <div class="menu-callout">
+      <div>
+        <span class="mono-label">Catering & events</span>
+        <p>Want to talk catering, coffee, breakfast or lunch for your office or event? Call or text Andrea at <a href="tel:3193893595">319-389-3595</a> or email <a href="mailto:info@brewhemia.com">info@brewhemia.com</a>.</p>
+      </div>
+      <a href="https://order.toasttab.com/online/brewhemia" target="_blank" rel="noopener noreferrer" class="btn-primary">ORDER ONLINE</a>
+    </div>
+
+    <div class="menu-grid">
+      {menus.map((m, i) => (
+        <div class="menu-card">
+          <div class="menu-card-head">
+            <span class="menu-num">{String(i + 1).padStart(2, "0")}</span>
+            <div>
+              <h2>{m.title}</h2>
+              <span class="menu-note">{m.note}</span>
+            </div>
+          </div>
+          <a href={m.img} target="_blank" rel="noopener" class="menu-img">
+            <img src={m.img} alt={`Brewhemia ${m.title} menu`} loading="lazy" />
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <div class="menu-cta">
+      <a href="https://order.toasttab.com/online/brewhemia" target="_blank" rel="noopener noreferrer" class="btn-primary">ORDER ONLINE</a>
+      <a href="https://www.toasttab.com/brewhemia/giftcards" target="_blank" rel="noopener noreferrer" class="btn-ghost">BUY GIFT CARDS</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .menu { max-width: 920px; margin: var(--spacing-4xl) auto 0; padding: 0 var(--spacing-xl); }
+
+  .menu-callout {
+    background: var(--color-linen-beige);
+    border: 1px solid var(--color-taupe-hairline);
+    border-left: 4px solid var(--color-burnt-orange);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-3xl);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+  }
+  .menu-callout .mono-label { display: block; color: var(--color-burnt-orange); margin-bottom: 4px; }
+  .menu-callout p { font-size: var(--font-size-base); color: var(--color-espresso); max-width: 52ch; }
+  .menu-callout a[href^="tel"], .menu-callout a[href^="mailto"] { color: var(--color-burnt-orange); border-bottom: 1px solid currentColor; }
+
+  .menu-grid { display: flex; flex-direction: column; gap: var(--spacing-3xl); }
+  .menu-card { }
+  .menu-card-head { display: flex; align-items: baseline; gap: var(--spacing-md); margin-bottom: var(--spacing-lg); }
+  .menu-num { font-family: var(--font-mono); font-size: var(--font-size-lg); color: var(--color-burnt-orange); }
+  .menu-card h2 { font-size: var(--font-size-2xl); }
+  .menu-note { font-family: var(--font-body); font-size: var(--font-size-sm); color: var(--color-coffee-dust); }
+  .menu-img { display: block; border: 1px solid var(--color-taupe-hairline); border-radius: var(--radius-lg); overflow: hidden; }
+  .menu-img img { width: 100%; }
+
+  .menu-cta { display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-4xl); }
+  .btn-primary, .btn-ghost {
+    font-family: var(--font-mono); font-size: var(--font-size-sm); font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; padding: 0.7rem 1.4rem;
+    border-radius: var(--radius); transition: all var(--transition-fast);
+  }
+  .btn-primary { background: var(--color-burnt-orange); color: var(--color-cream-paper); }
+  .btn-primary:hover { background: var(--color-amber-ink); }
+  .btn-ghost { border: 1px solid var(--color-espresso); color: var(--color-espresso); }
+  .btn-ghost:hover { background: var(--color-espresso); color: var(--color-cream-paper); }
+
+  @media (max-width: 600px) {
+    .menu-callout { flex-direction: column; align-items: flex-start; }
+  }
+</style>

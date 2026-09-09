@@ -1,0 +1,78 @@
+/* Brewhemia — Little Amps design system (coffee-zine / vinyl-sleeve) */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inclusive+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ---- Little Amps palette ---- */
+  --color-espresso: #522c25;
+  --color-burnt-orange: #c03001;
+  --color-amber-ink: #c46500;
+  --color-marigold-wash: #febf6f;
+  --color-dusty-blue: #89b4ca;
+  --color-cream-paper: #fff9f2;
+  --color-linen-beige: #f6ede3;
+  --color-taupe-hairline: #e6dad4;
+  --color-sandstone: #cbbbb4;
+  --color-coffee-dust: #977e77;
+
+  /* ---- Semantic aliases (used across pages) ---- */
+  --color-brand: var(--color-burnt-orange);
+  --color-brand-strong: var(--color-amber-ink);
+  --color-bg: var(--color-cream-paper);
+  --color-surface: var(--color-linen-beige);
+  --color-text: var(--color-espresso);
+  --color-muted: var(--color-coffee-dust);
+  --color-border: var(--color-taupe-hairline);
+
+  --color-footer-bg: var(--color-espresso);
+  --color-footer-text: #e7d8cf;
+  --color-footer-heading: var(--color-cream-paper);
+
+  /* ---- Typography ---- */
+  --font-display: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inclusive Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  /* legacy aliases kept so old rules don't break */
+  --font-heading: var(--font-display);
+
+  --font-size-xs: 0.6875rem;   /* 11px */
+  --font-size-sm: 0.8125rem;   /* 13px */
+  --font-size-base: 0.9375rem; /* 15px */
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.375rem;
+  --font-size-2xl: 1.75rem;
+  --font-size-3xl: 2.5rem;
+  --font-size-4xl: 3.25rem;
+  --font-size-5xl: 4rem;
+  --font-weight-heading: 400;
+  --font-weight-display: 400;
+
+  /* Mono label helper */
+  --tracking-mono: 0.05em;
+
+  /* ---- Spacing ---- */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 0.75rem;
+  --spacing-lg: 1.25rem;
+  --spacing-xl: 1.75rem;
+  --spacing-2xl: 2.5rem;
+  --spacing-3xl: 3.25rem;
+  --spacing-4xl: 4.5rem;
+  --spacing-5xl: 6rem;
+
+  /* ---- Layout ---- */
+  --wide-width: 1200px;
+  --max-width: 820px;
+
+  /* ---- Shape ---- */
+  --radius: 3px;
+  --radius-sm: 3px;
+  --radius-lg: 8px;
+  --leading-normal: 1.6;
+  --leading-snug: 1.05;
+  --tracking-tight: -0.03em;
+  --transition-fast: 0.15s ease;
+
+  --shadow-lg: none;
+}

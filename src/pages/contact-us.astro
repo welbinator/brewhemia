@@ -1,0 +1,125 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="Contact Us"
+  bannerTitle="Say Hello"
+  bannerKicker="Open ears"
+  bannerImage="/images/brewhemia-interior2.jpg"
+>
+  <section class="contact">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="mono-label">Open ears</span>
+        <h2>We'd love to hear from you.</h2>
+        <p>Thoughts, ideas, criticisms, or ramblings — send us a note and we'll direct it to the right member of our tribe.</p>
+
+        <div class="info-block">
+          <span class="info-label">Visit</span>
+          <p>1202 3rd St SE<br />Cedar Rapids, IA 52401</p>
+        </div>
+        <div class="info-block">
+          <span class="info-label">Hours</span>
+          <p>Monday — Closed<br />Tuesday–Sunday — 8am to 2pm</p>
+        </div>
+        <div class="info-block">
+          <span class="info-label">Reach us</span>
+          <p><a href="mailto:info@brewhemia.com">info@brewhemia.com</a><br /><a href="tel:3193640802">(319) 364–0802</a></p>
+        </div>
+        <div class="info-block">
+          <span class="info-label">Catering</span>
+          <p>Call or text Andrea at <a href="tel:3193893595">319-389-3595</a></p>
+        </div>
+      </div>
+
+      <form class="contact-form" name="contact" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
+        <div class="form-group">
+          <label for="name">Name <span class="required">*</span></label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email <span class="required">*</span></label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject <span class="required">*</span></label>
+          <input type="text" id="subject" name="subject" required />
+        </div>
+        <div class="form-group">
+          <label for="message">Message <span class="required">*</span></label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">SEND MESSAGE</button>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact { max-width: var(--wide-width); margin: var(--spacing-4xl) auto 0; padding: 0 var(--spacing-xl); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--spacing-4xl); align-items: start; }
+
+  .contact-info .mono-label { display: block; color: var(--color-burnt-orange); margin-bottom: var(--spacing-sm); }
+  .contact-info h2 { font-size: var(--font-size-3xl); margin-bottom: var(--spacing-md); }
+  .contact-info > p { font-size: var(--font-size-lg); color: var(--color-espresso); line-height: 1.7; margin-bottom: var(--spacing-xl); }
+
+  .info-block { padding: var(--spacing-md) 0; border-top: 1px solid var(--color-taupe-hairline); }
+  .info-label { font-family: var(--font-mono); font-size: var(--font-size-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-coffee-dust); }
+  .info-block p { margin-top: 4px; color: var(--color-espresso); line-height: 1.6; }
+  .info-block a { color: var(--color-burnt-orange); }
+  .info-block a:hover { color: var(--color-amber-ink); }
+
+  /* FORM */
+  .contact-form {
+    background: var(--color-linen-beige);
+    border: 1px solid var(--color-taupe-hairline);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl);
+  }
+  .form-group { margin-bottom: var(--spacing-lg); }
+  .form-group label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-espresso);
+    margin-bottom: var(--spacing-xs);
+  }
+  .required { color: var(--color-burnt-orange); }
+  .form-group input, .form-group textarea {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: var(--font-size-base);
+    color: var(--color-espresso);
+    background: var(--color-cream-paper);
+    border: 1px solid var(--color-taupe-hairline);
+    border-radius: var(--radius);
+    padding: 0.7rem 0.85rem;
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-burnt-orange);
+  }
+  .btn-submit {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--color-burnt-orange);
+    color: var(--color-cream-paper);
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.8rem 2rem;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+  }
+  .btn-submit:hover { background: var(--color-amber-ink); }
+
+  @media (max-width: 800px) {
+    .contact-grid { grid-template-columns: 1fr; gap: var(--spacing-2xl); }
+  }
+</style>

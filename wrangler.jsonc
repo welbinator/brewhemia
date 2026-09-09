@@ -1,0 +1,39 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "brewhemia-staging",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-02-24",
+	"compatibility_flags": ["nodejs_compat"],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "brewhemia-staging-db",
+			"database_id": "ee0ea71b-d1e6-4780-92dd-66349537f9ef"
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "brewhemia-staging-media"
+		}
+	],
+	"kv_namespaces": [
+		{
+			"binding": "SESSION",
+			"id": "047e42a1e0524a66b843c0190f9920b7"
+		}
+	],
+	// Worker Loader for plugin sandboxing
+	"worker_loaders": [
+		{
+			"binding": "LOADER"
+		}
+	],
+	// Drives scheduled publishing, plugin cron, and maintenance (see src/worker.ts)
+	"triggers": {
+		"crons": ["* * * * *"]
+	},
+	"cache": {
+		"enabled": true
+	}
+}

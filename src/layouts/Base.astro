@@ -1,0 +1,385 @@
+---
+import { getSiteSettings } from "emdash";
+import { EmDashHead } from "emdash/ui";
+import { createPublicPageContext } from "emdash/page";
+import "../styles/tokens.css";
+import "../styles/theme.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  /** If true, renders a full-width page banner (inner pages) */
+  bannerTitle?: string;
+  bannerImage?: string;
+  bannerKicker?: string;
+}
+
+const { title, description, image, bannerTitle, bannerImage, bannerKicker } = Astro.props;
+const settings = await getSiteSettings();
+const siteTitle = settings?.title || "BREWHEMIA";
+const fullTitle = title ? `${title} – ${siteTitle}` : siteTitle;
+const siteDescription =
+  settings?.tagline || "Coffee | Espresso | Beer | Wine | Spirits | Food";
+
+const pageCtx = createPublicPageContext({
+  Astro,
+  kind: "custom",
+  pageType: "website",
+  title: fullTitle,
+  pageTitle: title ?? siteTitle,
+  description: description || siteDescription,
+  canonical: Astro.url.href,
+  image,
+  seo: { ogImage: image },
+  siteName: siteTitle,
+});
+
+const currentPath = Astro.url.pathname;
+const isStaging = Astro.url.hostname.includes("staging") || Astro.url.hostname.endsWith(".workers.dev");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    {isStaging && <meta name="robots" content="noindex, nofollow" />}
+    <EmDashHead page={pageCtx} />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="/" class="site-logo">brewhemia<span class="logo-dot">.</span></a>
+        <nav class="primary-nav">
+          <ul>
+            <li><a href="/about-us" class:list={[{ active: currentPath.startsWith('/about-us') }]}>ABOUT</a></li>
+            <li><a href="/menu" class:list={[{ active: currentPath.startsWith('/menu') }]}>MENU</a></li>
+            <li><a href="/catering" class:list={[{ active: currentPath.startsWith('/catering') }]}>CATERING</a></li>
+            <li><a href="/events" class:list={[{ active: currentPath.startsWith('/events') }]}>EVENTS</a></li>
+            <li><a href="/contact-us" class:list={[{ active: currentPath.startsWith('/contact-us') }]}>CONTACT</a></li>
+            <li><a href="https://order.toasttab.com/online/brewhemia" target="_blank" rel="noopener noreferrer" class="btn-order">ORDER ONLINE</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- INNER PAGE BANNER (shown on non-home pages) -->
+    {bannerTitle && (
+      <div class="page-banner">
+        {bannerImage && (
+          <div class="page-banner-media" style={`background-image: url('${bannerImage}')`}></div>
+        )}
+        <div class="page-banner-inner">
+          {bannerKicker && <span class="banner-kicker">{bannerKicker}</span>}
+          <h1>{bannerTitle}</h1>
+        </div>
+      </div>
+    )}
+
+    <!-- MAIN CONTENT -->
+    <main>
+      <slot />
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-col footer-brand">
+          <span class="footer-wordmark">brewhemia<span class="logo-dot">.</span></span>
+          <p class="footer-blurb">A family-owned café in the historic ZCBJ Hall, New Bohemia District, Cedar Rapids.</p>
+          <span class="footer-tag">COFFEE · ESPRESSO · BEER · WINE · SPIRITS · FOOD</span>
+        </div>
+        <div class="footer-col">
+          <h3>Hours</h3>
+          <div class="hours-row"><span>Monday</span><span>Closed</span></div>
+          <div class="hours-row"><span>Tue–Sun</span><span>8am – 2pm</span></div>
+        </div>
+        <div class="footer-col">
+          <h3>Connect</h3>
+          <p><a href="https://www.facebook.com/brewhemia" target="_blank" rel="noopener">Facebook</a></p>
+          <p><a href="mailto:info@brewhemia.com">info@brewhemia.com</a></p>
+          <p><a href="tel:3193640802">(319) 364–0802</a></p>
+        </div>
+        <div class="footer-col">
+          <h3>Address</h3>
+          <p>1202 3rd St SE</p>
+          <p>Cedar Rapids, IA 52401</p>
+          <p><a href="https://maps.google.com/?q=1202+3rd+St+SE+Cedar+Rapids+Iowa+52401" target="_blank" rel="noopener">Get Directions →</a></p>
+        </div>
+      </div>
+      <div class="footer-ctas">
+        <a href="https://order.toasttab.com/online/brewhemia" target="_blank" rel="noopener noreferrer" class="btn-footer">ORDER ONLINE</a>
+        <a href="https://www.toasttab.com/brewhemia/giftcards" target="_blank" rel="noopener noreferrer" class="btn-footer ghost">BUY GIFT CARDS</a>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2019 BREWHEMIA · All Rights Reserved</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  @layer base;
+
+  @layer base {
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--font-size-base);
+      line-height: var(--leading-normal);
+      letter-spacing: 0.01em;
+      color: var(--color-espresso);
+      background: var(--color-cream-paper);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    img { max-width: 100%; height: auto; display: block; }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: var(--leading-snug);
+      letter-spacing: var(--tracking-tight);
+      color: var(--color-espresso);
+    }
+
+    /* Mono label utility */
+    .mono-label {
+      font-family: var(--font-mono);
+      font-size: var(--font-size-xs);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-coffee-dust);
+    }
+  }
+</style>
+
+<style>
+  /* ============================ HEADER ============================ */
+  .site-header {
+    background: var(--color-cream-paper);
+    border-bottom: 1px solid var(--color-taupe-hairline);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: var(--wide-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .site-logo {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--color-espresso);
+    letter-spacing: -0.02em;
+  }
+  .logo-dot { color: var(--color-burnt-orange); }
+
+  .primary-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+  }
+
+  .primary-nav a {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-espresso);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color var(--transition-fast);
+  }
+
+  .primary-nav a:hover { color: var(--color-burnt-orange); }
+  .primary-nav a.active { color: var(--color-burnt-orange); }
+
+  .btn-order {
+    background: var(--color-burnt-orange) !important;
+    color: var(--color-cream-paper) !important;
+    padding: 0.55rem 1rem;
+    border-radius: var(--radius);
+    transition: background var(--transition-fast) !important;
+  }
+  .btn-order:hover { background: var(--color-amber-ink) !important; }
+
+  /* ============================ PAGE BANNER ============================ */
+  .page-banner {
+    position: relative;
+    background: var(--color-linen-beige);
+    border-bottom: 1px solid var(--color-taupe-hairline);
+    overflow: hidden;
+  }
+  .page-banner-media {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.28;
+    filter: saturate(0.85);
+  }
+  .page-banner-inner {
+    position: relative;
+    max-width: var(--wide-width);
+    margin: 0 auto;
+    padding: var(--spacing-4xl) var(--spacing-xl);
+    text-align: left;
+  }
+  .banner-kicker {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-burnt-orange);
+    margin-bottom: var(--spacing-sm);
+  }
+  .page-banner h1 {
+    font-size: var(--font-size-4xl);
+    color: var(--color-espresso);
+  }
+
+  /* ============================ FOOTER ============================ */
+  .site-footer {
+    background: var(--color-espresso);
+    color: var(--color-footer-text);
+    padding-top: var(--spacing-4xl);
+    margin-top: var(--spacing-5xl);
+  }
+
+  .footer-content {
+    max-width: var(--wide-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl) var(--spacing-3xl);
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: var(--spacing-2xl);
+  }
+
+  .footer-wordmark {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    color: var(--color-cream-paper);
+  }
+  .footer-blurb {
+    margin: var(--spacing-md) 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    max-width: 34ch;
+    color: #e7d8cf;
+  }
+  .footer-tag {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    color: var(--color-marigold-wash);
+  }
+
+  .footer-col h3 {
+    font-family: var(--font-mono);
+    color: var(--color-marigold-wash);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .footer-col p {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-footer-text);
+  }
+  .footer-col a { color: var(--color-footer-text); transition: color var(--transition-fast); }
+  .footer-col a:hover { color: var(--color-marigold-wash); }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.04em;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-footer-text);
+    border-bottom: 1px dotted rgba(231,216,207,0.2);
+    padding-bottom: 3px;
+  }
+
+  .footer-ctas {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    flex-wrap: wrap;
+  }
+
+  .btn-footer {
+    display: inline-block;
+    background: var(--color-burnt-orange);
+    color: var(--color-cream-paper);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.7rem 2rem;
+    border-radius: var(--radius);
+    transition: all var(--transition-fast);
+  }
+  .btn-footer:hover { background: var(--color-amber-ink); }
+  .btn-footer.ghost {
+    background: transparent;
+    border: 1px solid var(--color-coffee-dust);
+    color: var(--color-cream-paper);
+  }
+  .btn-footer.ghost:hover { border-color: var(--color-marigold-wash); color: var(--color-marigold-wash); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(231,216,207,0.15);
+    padding: var(--spacing-lg);
+    text-align: center;
+  }
+  .footer-bottom p {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    color: #b79c92;
+  }
+
+  /* ============================ RESPONSIVE ============================ */
+  @media (max-width: 900px) {
+    .footer-content { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 768px) {
+    .header-inner {
+      flex-direction: column;
+      height: auto;
+      padding: var(--spacing-md) var(--spacing-lg);
+      gap: var(--spacing-sm);
+    }
+    .primary-nav ul { flex-wrap: wrap; justify-content: center; gap: var(--spacing-md); }
+    .page-banner-inner { padding: var(--spacing-2xl) var(--spacing-lg); text-align: center; }
+    .footer-content { grid-template-columns: 1fr; }
+  }
+</style>

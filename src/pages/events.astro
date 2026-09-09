@@ -1,0 +1,39 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="Events"
+  bannerTitle="Events"
+  bannerKicker="Live at Brewhemia"
+  bannerImage="/images/vinyl-night3.jpg"
+>
+  <section class="events">
+    <div class="events-inner">
+      <span class="mono-label">Community board</span>
+      <h2>Nothing on the calendar right now.</h2>
+      <p>We host vinyl nights, art openings and neighborhood gatherings throughout the year. Follow along on Facebook for the next one — or stop in and ask what's coming up.</p>
+      <div class="events-actions">
+        <a href="https://www.facebook.com/brewhemia" target="_blank" rel="noopener noreferrer" class="btn-primary">FOLLOW ON FACEBOOK</a>
+        <a href="/catering" class="btn-ghost">HOST YOUR OWN</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .events { max-width: var(--max-width); margin: var(--spacing-5xl) auto; padding: 0 var(--spacing-xl); text-align: center; }
+  .events .mono-label { display: block; color: var(--color-burnt-orange); margin-bottom: var(--spacing-sm); }
+  .events h2 { font-size: var(--font-size-3xl); margin-bottom: var(--spacing-lg); }
+  .events p { font-size: var(--font-size-lg); color: var(--color-espresso); line-height: 1.7; margin-bottom: var(--spacing-xl); }
+  .events-actions { display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap; }
+  .btn-primary, .btn-ghost {
+    font-family: var(--font-mono); font-size: var(--font-size-sm); font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; padding: 0.7rem 1.4rem;
+    border-radius: var(--radius); transition: all var(--transition-fast);
+  }
+  .btn-primary { background: var(--color-burnt-orange); color: var(--color-cream-paper); }
+  .btn-primary:hover { background: var(--color-amber-ink); }
+  .btn-ghost { border: 1px solid var(--color-espresso); color: var(--color-espresso); }
+  .btn-ghost:hover { background: var(--color-espresso); color: var(--color-cream-paper); }
+</style>

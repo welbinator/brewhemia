@@ -1,0 +1,318 @@
+---
+import Base from "../layouts/Base.astro";
+
+const features = [
+  {
+    href: "/menu",
+    img: "/images/grilled-cheese-and-soup.jpg",
+    kicker: "01 — Kitchen",
+    title: "Breakfast & Lunch",
+    body: "Award-winning breakfast burritos — a Food Network Top 25 — biscuits & gravy, and our Parmesan-encrusted grilled cheese. Made from scratch, every day.",
+  },
+  {
+    href: "/menu",
+    img: "/images/bottles-dark.jpg",
+    kicker: "02 — Bar",
+    title: "Coffee to Cocktails",
+    body: "Espresso, cold brew and The Bohemian by day; Iowa craft beer, wine, local spirits and a seriously handcrafted Irish coffee whenever the mood strikes.",
+  },
+  {
+    href: "/events",
+    img: "/images/vinyl-night3.jpg",
+    kicker: "03 — Community",
+    title: "In New Bohemia",
+    body: "Rotating art on the walls, vinyl on the turntable, and a room built for lingering. A small-town feel that vibes like a big-city café.",
+  },
+];
+
+// Real Google / Yelp reviews — verbatim, sourced Sep 2026
+const reviews = [
+  {
+    quote: "What's not to love? The atmosphere is chill, the food is delicious, and the service is great. My favorites are the breakfast burrito in the morning, and the curry chicken salad for lunch.",
+    name: "Rachel K.",
+    meta: "Yelp Elite · Iowa City, IA",
+  },
+  {
+    quote: "Nice and cozy little coffee house, that also serves breakfast, lunch and beer to boot! The food was delicious, the coffee excellent. New favorite coffee spot!",
+    name: "Ryan B.",
+    meta: "Google review",
+  },
+  {
+    quote: "We came to Brewhemia for a late breakfast and this place is clearly beloved in this area! Good quality coffee, nice ambiance inside, and good service staff.",
+    name: "Trevor H.",
+    meta: "Google review",
+  },
+];
+---
+
+<Base title="Coffee | Espresso | Beer | Wine | Spirits | Food">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-media">
+      <img src="/images/brewhemia-hero.jpg" alt="Inside Brewhemia café — espresso bar, exposed brick, morning light" loading="eager" />
+    </div>
+    <div class="hero-panel">
+      <span class="hero-kicker">Est. New Bohemia · Cedar Rapids, IA</span>
+      <h1>A family-owned café<br />on 3rd Street.</h1>
+      <p>Amazing coffee, scratch-made breakfast & lunch, and a full bar — served inside the historic ZCBJ Hall since day one.</p>
+      <div class="hero-actions">
+        <a href="https://order.toasttab.com/online/brewhemia" target="_blank" rel="noopener noreferrer" class="btn-primary">ORDER ONLINE</a>
+        <a href="/menu" class="btn-ghost">SEE THE MENU</a>
+      </div>
+      <div class="hero-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-text">4.7 · 746 Google reviews</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAGLINE STRIP -->
+  <div class="tagline-strip">
+    <span>COFFEE</span><b>·</b><span>ESPRESSO</span><b>·</b><span>BEER</span><b>·</b><span>WINE</span><b>·</b><span>SPIRITS</span><b>·</b><span>FOOD</span>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="intro-inner">
+      <span class="mono-label">Open · Tue–Sun · 8am–2pm</span>
+      <h2>We took the best of an American café and gave it a European twist.</h2>
+      <p>Brewhemia is a name that encompasses a focus on quality beverage while embracing the community and neighborhood of New Bohemia. Come for the coffee, stay for the biscuits and gravy, come back for a glass of wine.</p>
+      <a href="/about-us" class="text-link">Read our story →</a>
+    </div>
+  </section>
+
+  <!-- FEATURE CARDS -->
+  <section class="features">
+    <div class="features-grid">
+      {features.map((f) => (
+        <a href={f.href} class="feature-card">
+          <div class="feature-img"><img src={f.img} alt={f.title} loading="lazy" /></div>
+          <div class="feature-body">
+            <span class="feature-kicker">{f.kicker}</span>
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+            <span class="feature-more">Explore →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews">
+    <div class="reviews-head">
+      <span class="mono-label">From the neighborhood</span>
+      <h2>Beloved in Cedar Rapids.</h2>
+    </div>
+    <div class="reviews-grid">
+      {reviews.map((r) => (
+        <figure class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <blockquote>{r.quote}</blockquote>
+          <figcaption><span class="review-name">{r.name}</span><span class="review-meta">{r.meta}</span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <div class="cta-inner">
+      <h2>Pull up a stool.</h2>
+      <p>1202 3rd St SE · Cedar Rapids, IA 52401 — open Tuesday through Sunday, 8am to 2pm.</p>
+      <div class="cta-actions">
+        <a href="https://order.toasttab.com/online/brewhemia" target="_blank" rel="noopener noreferrer" class="btn-primary">ORDER ONLINE</a>
+        <a href="https://maps.google.com/?q=1202+3rd+St+SE+Cedar+Rapids+Iowa+52401" target="_blank" rel="noopener noreferrer" class="btn-ghost light">GET DIRECTIONS</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---------- HERO ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    max-width: var(--wide-width);
+    margin: var(--spacing-2xl) auto 0;
+    padding: 0 var(--spacing-xl);
+    gap: var(--spacing-2xl);
+    align-items: stretch;
+  }
+  .hero-media {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-taupe-hairline);
+  }
+  .hero-media img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--spacing-lg) 0;
+  }
+  .hero-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-burnt-orange);
+    margin-bottom: var(--spacing-md);
+  }
+  .hero-panel h1 {
+    font-size: var(--font-size-4xl);
+    line-height: 1.02;
+    margin-bottom: var(--spacing-lg);
+  }
+  .hero-panel > p {
+    font-size: var(--font-size-lg);
+    color: var(--color-espresso);
+    max-width: 40ch;
+    margin-bottom: var(--spacing-xl);
+  }
+  .hero-actions { display: flex; gap: var(--spacing-md); flex-wrap: wrap; margin-bottom: var(--spacing-xl); }
+  .hero-rating { display: flex; align-items: center; gap: var(--spacing-sm); }
+  .stars, .review-stars, .review-card .review-stars { color: var(--color-amber-ink); letter-spacing: 0.1em; }
+  .rating-text {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.06em;
+    color: var(--color-coffee-dust);
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .btn-primary, .btn-ghost {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.4rem;
+    border-radius: var(--radius);
+    transition: all var(--transition-fast);
+  }
+  .btn-primary { background: var(--color-burnt-orange); color: var(--color-cream-paper); }
+  .btn-primary:hover { background: var(--color-amber-ink); }
+  .btn-ghost { border: 1px solid var(--color-espresso); color: var(--color-espresso); }
+  .btn-ghost:hover { background: var(--color-espresso); color: var(--color-cream-paper); }
+  .btn-ghost.light { border-color: var(--color-cream-paper); color: var(--color-cream-paper); }
+  .btn-ghost.light:hover { background: var(--color-cream-paper); color: var(--color-espresso); }
+
+  /* ---------- TAGLINE STRIP ---------- */
+  .tagline-strip {
+    margin-top: var(--spacing-3xl);
+    background: var(--color-espresso);
+    color: var(--color-marigold-wash);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.18em;
+    text-align: center;
+    padding: var(--spacing-md);
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+  .tagline-strip b { color: var(--color-burnt-orange); }
+
+  /* ---------- INTRO ---------- */
+  .intro {
+    max-width: var(--max-width);
+    margin: var(--spacing-5xl) auto;
+    padding: 0 var(--spacing-xl);
+    text-align: center;
+  }
+  .intro .mono-label { display: block; margin-bottom: var(--spacing-md); color: var(--color-burnt-orange); }
+  .intro h2 { font-size: var(--font-size-3xl); margin-bottom: var(--spacing-lg); }
+  .intro p { font-size: var(--font-size-lg); color: var(--color-espresso); margin-bottom: var(--spacing-lg); }
+  .text-link {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.06em;
+    color: var(--color-burnt-orange);
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+
+  /* ---------- FEATURES ---------- */
+  .features { max-width: var(--wide-width); margin: 0 auto; padding: 0 var(--spacing-xl); }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-lg); }
+  .feature-card {
+    background: var(--color-linen-beige);
+    border: 1px solid var(--color-taupe-hairline);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-fast);
+  }
+  .feature-card:hover { transform: translateY(-3px); }
+  .feature-img { aspect-ratio: 4 / 3; overflow: hidden; }
+  .feature-img img { width: 100%; height: 100%; object-fit: cover; }
+  .feature-body { padding: var(--spacing-lg); display: flex; flex-direction: column; gap: var(--spacing-sm); }
+  .feature-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-coffee-dust);
+  }
+  .feature-body h3 { font-size: var(--font-size-xl); }
+  .feature-body p { font-size: var(--font-size-sm); color: var(--color-espresso); line-height: 1.6; }
+  .feature-more {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-burnt-orange);
+    margin-top: auto;
+  }
+
+  /* ---------- REVIEWS ---------- */
+  .reviews { max-width: var(--wide-width); margin: var(--spacing-5xl) auto 0; padding: 0 var(--spacing-xl); }
+  .reviews-head { text-align: center; margin-bottom: var(--spacing-2xl); }
+  .reviews-head .mono-label { display: block; margin-bottom: var(--spacing-sm); color: var(--color-burnt-orange); }
+  .reviews-head h2 { font-size: var(--font-size-3xl); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-lg); }
+  .review-card {
+    background: var(--color-cream-paper);
+    border: 1px solid var(--color-taupe-hairline);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  .review-card .review-stars { font-size: var(--font-size-sm); }
+  .review-card blockquote {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.4;
+    color: var(--color-espresso);
+    letter-spacing: -0.01em;
+  }
+  .review-card figcaption { display: flex; flex-direction: column; margin-top: auto; }
+  .review-name { font-weight: 600; font-size: var(--font-size-sm); color: var(--color-espresso); }
+  .review-meta {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.04em;
+    color: var(--color-coffee-dust);
+  }
+
+  /* ---------- CTA BAND ---------- */
+  .cta-band { margin-top: var(--spacing-5xl); background: var(--color-linen-beige); border-top: 1px solid var(--color-taupe-hairline); border-bottom: 1px solid var(--color-taupe-hairline); }
+  .cta-inner { max-width: var(--max-width); margin: 0 auto; padding: var(--spacing-4xl) var(--spacing-xl); text-align: center; }
+  .cta-inner h2 { font-size: var(--font-size-3xl); margin-bottom: var(--spacing-md); }
+  .cta-inner p { color: var(--color-espresso); font-size: var(--font-size-lg); margin-bottom: var(--spacing-xl); }
+  .cta-actions { display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap; }
+  .cta-band .btn-ghost { border-color: var(--color-espresso); color: var(--color-espresso); }
+  .cta-band .btn-ghost:hover { background: var(--color-espresso); color: var(--color-cream-paper); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-media { aspect-ratio: 16 / 10; }
+    .features-grid, .reviews-grid { grid-template-columns: 1fr; }
+  }
+</style>

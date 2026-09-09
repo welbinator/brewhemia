@@ -1,0 +1,63 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="About Us"
+  bannerTitle="Our Story"
+  bannerKicker="About Brewhemia"
+  bannerImage="/images/brewhemia-exterior2.jpg"
+>
+  <section class="about">
+    <div class="about-grid">
+      <div class="about-media">
+        <img src="/images/brewhemia-exterior2.jpg" alt="Brewhemia storefront in the New Bohemia District" loading="lazy" />
+      </div>
+      <div class="about-text">
+        <span class="mono-label">Family-owned · Women-owned</span>
+        <h2>Rooted in New Bohemia.</h2>
+        <p>Brewhemia is a family-owned café located in the historic ZCBJ Hall in the New Bohemia District of Cedar Rapids, Iowa. Brewhemia is a name that encompasses a focus on quality beverage while embracing the community and neighborhood of New Bohemia.</p>
+        <p>At Brewhemia you'll find an intimate café featuring amazing coffee, scratch-made breakfast and lunch, plus a full bar with a variety of local craft beers, wine and spirits.</p>
+        <p>We have a small-town feel, but we're bustling and vibing like a big-city café — a historic building, rotating art on the walls, coffee like you've never tasted, and the best staff to make you feel welcome. After breakfast or lunch, walk it off and enjoy everything the neighborhood has to offer.</p>
+      </div>
+    </div>
+
+    <div class="about-stats">
+      <div class="stat"><span class="stat-num">4.7★</span><span class="stat-label">746 Google reviews</span></div>
+      <div class="stat"><span class="stat-num">Top 25</span><span class="stat-label">Food Network burrito</span></div>
+      <div class="stat"><span class="stat-num">8–2</span><span class="stat-label">Open Tue–Sun</span></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .about { max-width: var(--wide-width); margin: var(--spacing-4xl) auto 0; padding: 0 var(--spacing-xl); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: var(--spacing-3xl); align-items: center; }
+  .about-media { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-taupe-hairline); }
+  .about-media img { width: 100%; height: 100%; object-fit: cover; }
+  .about-text .mono-label { display: block; color: var(--color-burnt-orange); margin-bottom: var(--spacing-sm); }
+  .about-text h2 { font-size: var(--font-size-3xl); margin-bottom: var(--spacing-lg); }
+  .about-text p { font-size: var(--font-size-lg); color: var(--color-espresso); line-height: 1.7; margin-bottom: var(--spacing-lg); }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-4xl);
+  }
+  .stat {
+    background: var(--color-linen-beige);
+    border: 1px solid var(--color-taupe-hairline);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+  }
+  .stat-num { display: block; font-family: var(--font-display); font-size: var(--font-size-3xl); color: var(--color-burnt-orange); }
+  .stat-label { font-family: var(--font-mono); font-size: var(--font-size-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-coffee-dust); }
+
+  @media (max-width: 800px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .about-stats { grid-template-columns: 1fr; }
+  }
+</style>

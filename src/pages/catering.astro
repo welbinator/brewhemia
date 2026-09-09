@@ -1,0 +1,145 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="Catering"
+  bannerTitle="Catering"
+  bannerKicker="For your office or event"
+  bannerImage="/images/brewhemia_catering.jpg"
+>
+  <section class="catering">
+    <div class="catering-intro">
+      <span class="mono-label">Let us feed your crew</span>
+      <h2>Thanks for considering Brewhemia for your catering needs.</h2>
+      <p>Three easy ways to get started:</p>
+      <ol>
+        <li>Place your order through <a href="https://www.ezcater.com/brand/pvt/brewhemia" target="_blank" rel="noopener">ezCater</a>.</li>
+        <li>Text or call our catering manager, Andrea, at <a href="tel:3193893595">319.389.3595</a>.</li>
+        <li>Fill out the form below and we'll get back to you.</li>
+      </ol>
+    </div>
+
+    <form class="catering-form" name="catering" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="catering" />
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Name <span class="required">*</span></label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone <span class="required">*</span></label>
+          <input type="tel" id="phone" name="phone" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email <span class="required">*</span></label>
+          <input type="email" id="email" name="email" required />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="event-date">Date of event</label>
+          <input type="text" id="event-date" name="event-date" placeholder="MM/DD/YYYY" />
+        </div>
+        <div class="form-group">
+          <label for="headcount">How many people?</label>
+          <input type="number" id="headcount" name="headcount" min="1" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Interested in</label>
+        <div class="checkboxes">
+          <label class="checkbox-label"><input type="checkbox" name="interested" value="Coffee" /> Coffee</label>
+          <label class="checkbox-label"><input type="checkbox" name="interested" value="Donuts" /> Donuts</label>
+          <label class="checkbox-label"><input type="checkbox" name="interested" value="Breakfast" /> Breakfast</label>
+          <label class="checkbox-label"><input type="checkbox" name="interested" value="Lunch" /> Lunch</label>
+          <label class="checkbox-label"><input type="checkbox" name="interested" value="Other" /> Other</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="details">Details <span class="required">*</span></label>
+        <textarea id="details" name="details" rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">SEND CATERING REQUEST</button>
+    </form>
+  </section>
+</Base>
+
+<style>
+  .catering { max-width: var(--max-width); margin: var(--spacing-4xl) auto 0; padding: 0 var(--spacing-xl); }
+
+  .catering-intro { margin-bottom: var(--spacing-2xl); }
+  .catering-intro .mono-label { display: block; color: var(--color-burnt-orange); margin-bottom: var(--spacing-sm); }
+  .catering-intro h2 { font-size: var(--font-size-2xl); margin-bottom: var(--spacing-md); }
+  .catering-intro p { color: var(--color-espresso); margin-bottom: var(--spacing-sm); }
+  .catering-intro ol { padding-left: 1.4rem; color: var(--color-espresso); line-height: 1.9; }
+  .catering-intro ol a { color: var(--color-burnt-orange); border-bottom: 1px solid currentColor; }
+  .catering-intro ol a:hover { color: var(--color-amber-ink); }
+
+  .catering-form {
+    background: var(--color-linen-beige);
+    border: 1px solid var(--color-taupe-hairline);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg); }
+  .form-group { margin-bottom: var(--spacing-lg); }
+  .form-group label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-espresso);
+    margin-bottom: var(--spacing-xs);
+  }
+  .required { color: var(--color-burnt-orange); }
+  .form-group input, .form-group textarea {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: var(--font-size-base);
+    color: var(--color-espresso);
+    background: var(--color-cream-paper);
+    border: 1px solid var(--color-taupe-hairline);
+    border-radius: var(--radius);
+    padding: 0.7rem 0.85rem;
+  }
+  .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--color-burnt-orange); }
+
+  .checkboxes { display: flex; flex-wrap: wrap; gap: var(--spacing-md); }
+  .checkbox-label {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-body); font-size: var(--font-size-sm); text-transform: none; letter-spacing: 0;
+    color: var(--color-espresso); margin-bottom: 0;
+  }
+  .checkbox-label input { width: auto; }
+
+  .btn-submit {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--color-burnt-orange);
+    color: var(--color-cream-paper);
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.8rem 2rem;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+  }
+  .btn-submit:hover { background: var(--color-amber-ink); }
+
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
