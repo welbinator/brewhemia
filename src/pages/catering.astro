@@ -20,8 +20,7 @@ import Base from "../layouts/Base.astro";
       </ol>
     </div>
 
-    <form class="catering-form" name="catering" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="catering" />
+    <form class="catering-form" id="catering-form" name="catering" method="POST" action="/api/catering">
       <div class="form-row">
         <div class="form-group">
           <label for="name">Name <span class="required">*</span></label>
@@ -70,6 +69,7 @@ import Base from "../layouts/Base.astro";
       </div>
 
       <button type="submit" class="btn-submit">SEND CATERING REQUEST</button>
+      <p class="form-status" id="catering-status" role="status" aria-live="polite"></p>
     </form>
   </section>
 </Base>
@@ -138,8 +138,48 @@ import Base from "../layouts/Base.astro";
     transition: background var(--transition-fast);
   }
   .btn-submit:hover { background: var(--color-amber-ink); }
+  .btn-submit:disabled { opacity: 0.6; cursor: default; }
+  .form-status { margin-top: var(--spacing-md); font-family: var(--font-mono); font-size: var(--font-size-sm); }
+  .form-status.error { color: var(--color-burnt-orange); }
+  .form-status.success { color: #2e7d32; }
 
   @media (max-width: 600px) {
     .form-row { grid-template-columns: 1fr; }
   }
 </style>
+
+<script>
+  const cform = document.getElementById("catering-form") as HTMLFormElement | null;
+  const cstatus = document.getElementById("catering-status");
+  if (cform && cstatus) {
+    cform.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = cform.querySelector("button[type=submit]") as HTMLButtonElement;
+      cstatus.className = "form-status";
+      cstatus.textContent = "";
+      btn.disabled = true;
+      btn.textContent = "SENDING…";
+      try {
+        const res = await fetch("/api/catering", {
+          method: "POST",
+          body: new FormData(cform),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) {
+          cform.reset();
+          cstatus.className = "form-status success";
+          cstatus.textContent = "Thanks for reaching out — we'll be in touch soon!";
+        } else {
+          cstatus.className = "form-status error";
+          cstatus.textContent = data.error || "Something went wrong. Please try again.";
+        }
+      } catch {
+        cstatus.className = "form-status error";
+        cstatus.textContent = "Network error. Please try again.";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "SEND CATERING REQUEST";
+      }
+    });
+  }
+</script>
