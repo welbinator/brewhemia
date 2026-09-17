@@ -1,7 +1,4 @@
 ---
-import { getSiteSettings } from "emdash";
-import { EmDashHead } from "emdash/ui";
-import { createPublicPageContext } from "emdash/page";
 import "../styles/tokens.css";
 import "../styles/theme.css";
 
@@ -16,24 +13,10 @@ interface Props {
 }
 
 const { title, description, image, bannerTitle, bannerImage, bannerKicker } = Astro.props;
-const settings = await getSiteSettings();
-const siteTitle = settings?.title || "BREWHEMIA";
+const siteTitle = "BREWHEMIA";
 const fullTitle = title ? `${title} – ${siteTitle}` : siteTitle;
 const siteDescription =
-  settings?.tagline || "Coffee | Espresso | Beer | Wine | Spirits | Food";
-
-const pageCtx = createPublicPageContext({
-  Astro,
-  kind: "custom",
-  pageType: "website",
-  title: fullTitle,
-  pageTitle: title ?? siteTitle,
-  description: description || siteDescription,
-  canonical: Astro.url.href,
-  image,
-  seo: { ogImage: image },
-  siteName: siteTitle,
-});
+  description || "Coffee | Espresso | Beer | Wine | Spirits | Food";
 
 const currentPath = Astro.url.pathname;
 const isStaging = Astro.url.hostname.includes("staging") || Astro.url.hostname.endsWith(".workers.dev");
@@ -45,8 +28,14 @@ const isStaging = Astro.url.hostname.includes("staging") || Astro.url.hostname.e
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
+    <meta name="description" content={siteDescription} />
+    <link rel="canonical" href={Astro.url.href} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={siteDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteTitle} />
+    {image && <meta property="og:image" content={image} />}
     {isStaging && <meta name="robots" content="noindex, nofollow" />}
-    <EmDashHead page={pageCtx} />
   </head>
   <body>
     <!-- HEADER -->
