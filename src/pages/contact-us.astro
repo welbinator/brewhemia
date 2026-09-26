@@ -56,6 +56,7 @@ import Base from "../layouts/Base.astro";
           <textarea id="message" name="message" rows="6" required></textarea>
         </div>
         <button type="submit" class="btn-submit">SEND MESSAGE</button>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFElAop_3ftSB6oF" data-theme="light" style="margin-top:1rem"></div>
         <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -147,11 +148,19 @@ import Base from "../layouts/Base.astro";
       status.textContent = "";
       btn.disabled = true;
       btn.textContent = "SENDING…";
+      const fd = Object.fromEntries(new FormData(form) as any);
+      if (!fd["cf-turnstile-response"]) {
+        status.className = "form-status error";
+        status.textContent = "Please complete the anti-spam check above.";
+        btn.disabled = false;
+        btn.textContent = "SEND MESSAGE";
+        return;
+      }
       try {
         const res = await fetch("/api/contact", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify(Object.fromEntries(new FormData(form) as any)),
+          body: JSON.stringify(fd),
         });
         const data = await res.json().catch(() => ({}));
         if (res.ok && data.ok) {
