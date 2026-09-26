@@ -87,6 +87,66 @@ function spamCheck(data) {
   return { spam: false, reason: "" };
 }
 
+function uid() {
+  return "sub_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+}
+
+// Persist a submission to D1. Never throws — a DB hiccup must not break the email path.
+async function saveSubmission(env, row) {
+  if (!env.DB) return null;
+  try {
+    const id = uid();
+    await env.DB.prepare(
+      `INSERT INTO submissions (id, form_name, name, email, phone, subject, message, company, event_date, guests, extra, is_spam, spam_reason, created_at)
+       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?, datetime('now'))`
+    ).bind(
+      id,
+      row.form_name || "contact",
+      row.name || null,
+      row.email || null,
+      row.phone || null,
+      row.subject || null,
+      row.message || null,
+      row.company || null,
+      row.event_date || null,
+      row.guests || null,
+      row.extra ? JSON.stringify(row.extra) : null,
+      row.is_spam ? 1 : 0,
+      row.spam_reason || null
+    ).run();
+    return id;
+  } catch (_) {
+    return null;
+  }
+}
+
+async function hmacHex(secret, msg) {
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(msg));
+  return [...new Uint8Array(sig)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+// Fire a phone push to the Brewhemia Command Center. Fire-and-forget; never blocks the response.
+async function notifyCommandCenter(env, lead) {
+  const secret = env.PUSH_NOTIFY_SECRET;
+  if (!secret) return;
+  const url = env.CC_NOTIFY_URL || "https://cc.crweb.design/api/push/notify";
+  try {
+    const ts = Math.floor(Date.now() / 1000);
+    const body = JSON.stringify({
+      name: lead.name, email: lead.email, site: "brewhemia.com",
+      message: lead.message, ts,
+    });
+    const sig = await hmacHex(secret, `v0:${ts}:${body}`);
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-CC-Signature": `t=${ts},v0=${sig}` },
+      body,
+    });
+  } catch (_) { /* CC down — row already saved; ignore */ }
+}
+
 async function handleContact(request, env) {
   const apiKey = env.BREVO_API_KEY;
   if (!apiKey) return json({ ok: false, error: "Email not configured." }, 500);
@@ -94,9 +154,15 @@ async function handleContact(request, env) {
   const { name, email, subject, message } = data;
   if (!name || !email || !message) return json({ ok: false, error: "Please fill in the required fields." }, 400);
 
-  // Spam gate — silently accept-and-drop so bots don't probe the rules.
+  // Spam gate — store spam rows (is_spam=1) but don't email or notify.
   const spam = spamCheck(data);
-  if (spam.spam) return json({ ok: true });
+  if (spam.spam) {
+    await saveSubmission(env, { form_name: "contact", name, email, subject, message, is_spam: 1, spam_reason: spam.reason });
+    return json({ ok: true });
+  }
+
+  // Persist the clean submission first (survives even if email/push fail).
+  await saveSubmission(env, { form_name: "contact", name, email, subject, message });
 
   const notifyHtml = `<div style="font-family:Arial,sans-serif;font-size:15px;color:#2b2b2b;line-height:1.6">
     <h2 style="margin:0 0 12px">New contact form submission</h2>
@@ -115,6 +181,7 @@ async function handleContact(request, env) {
     sender: SENDER, to: [{ email, name }],
     subject: "Thanks for reaching out to Brewhemia", htmlContent: autoReplyHtml(name),
   });
+  try { await notifyCommandCenter(env, { name, email, message: subject ? `${subject}: ${message}` : message }); } catch (_) {}
   return json({ ok: true });
 }
 
@@ -125,9 +192,17 @@ async function handleCatering(request, env) {
   const { name, email, phone, details } = data;
   if (!name || !email || !phone || !details) return json({ ok: false, error: "Please fill in the required fields." }, 400);
 
-  // Spam gate — silently accept-and-drop so bots don't probe the rules.
+  // Spam gate — store spam rows (is_spam=1) but don't email or notify.
   const spam = spamCheck(data);
-  if (spam.spam) return json({ ok: true });
+  if (spam.spam) {
+    await saveSubmission(env, { form_name: "catering", name, email, phone, message: details, company: data.company,
+      event_date: data["event-date"], guests: data.headcount, extra: { interested }, is_spam: 1, spam_reason: spam.reason });
+    return json({ ok: true });
+  }
+
+  // Persist the clean submission first.
+  await saveSubmission(env, { form_name: "catering", name, email, phone, message: details, company: data.company,
+    event_date: data["event-date"], guests: data.headcount, extra: { interested } });
 
   const notifyHtml = `<div style="font-family:Arial,sans-serif;font-size:15px;color:#2b2b2b;line-height:1.6">
     <h2 style="margin:0 0 12px">New catering request</h2>
@@ -150,6 +225,7 @@ async function handleCatering(request, env) {
     sender: SENDER, to: [{ email, name }],
     subject: "Thanks for your catering inquiry — Brewhemia", htmlContent: autoReplyHtml(name),
   });
+  try { await notifyCommandCenter(env, { name, email, message: `Catering request${data.company ? " (" + data.company + ")" : ""}: ${details}` }); } catch (_) {}
   return json({ ok: true });
 }
 

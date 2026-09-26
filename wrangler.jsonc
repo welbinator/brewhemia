@@ -2,5 +2,12 @@
   "name": "brewhemia-staging",
   "main": "./worker.js",
   "compatibility_date": "2026-02-24",
-  "assets": { "directory": "./dist", "binding": "ASSETS" }
+  "assets": { "directory": "./dist", "binding": "ASSETS" },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "brewhemia-db",
+      "database_id": "c35cf63d-2536-40c6-9315-ce9fb69b9f61"
+    }
+  ]
 }
