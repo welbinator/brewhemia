@@ -1,6 +1,7 @@
 /* Brewhemia — Little Amps design system (coffee-zine / vinyl-sleeve) */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inclusive+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* Fonts are loaded non-blocking via a <link rel=preload as=style> in Base.astro
+   (moving them out of this @import removed ~1,350ms of render-blocking). */
 
 :root {
   /* ---- Little Amps palette ---- */

@@ -4,21 +4,21 @@ import Base from "../layouts/Base.astro";
 const features = [
   {
     href: "/menu",
-    img: "/images/grilled-cheese-and-soup.jpg",
+    img: "/images/grilled-cheese-and-soup.webp",
     kicker: "01 — Kitchen",
     title: "Breakfast & Lunch",
     body: "Award-winning breakfast burritos — a Food Network Top 25 — biscuits & gravy, and our Parmesan-encrusted grilled cheese. Made from scratch, every day.",
   },
   {
     href: "/menu",
-    img: "/images/bottles-dark.jpg",
+    img: "/images/bottles-dark.webp",
     kicker: "02 — Bar",
     title: "Coffee to Cocktails",
     body: "Espresso, cold brew and The Bohemian by day; Iowa craft beer, wine, local spirits and a seriously handcrafted Irish coffee whenever the mood strikes.",
   },
   {
     href: "/events",
-    img: "/images/vinyl-night3.jpg",
+    img: "/images/vinyl-night3.webp",
     kicker: "03 — Community",
     title: "In New Bohemia",
     body: "Rotating art on the walls, vinyl on the turntable, and a room built for lingering. A small-town feel that vibes like a big-city café.",
@@ -49,7 +49,7 @@ const reviews = [
   <!-- HERO -->
   <section class="hero">
     <div class="hero-media">
-      <img src="/images/brewhemia-hero.jpg" alt="Inside Brewhemia café — espresso bar, exposed brick, morning light" loading="eager" />
+      <img src="/images/brewhemia-hero.webp" srcset="/images/brewhemia-hero-800.webp 800w, /images/brewhemia-hero.webp 1500w" sizes="100vw" width="1500" height="633" alt="Inside Brewhemia café — espresso bar, exposed brick, morning light" loading="eager" fetchpriority="high" decoding="async" />
     </div>
     <div class="hero-panel">
       <span class="hero-kicker">Est. New Bohemia · Cedar Rapids, IA</span>

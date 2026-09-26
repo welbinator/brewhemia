@@ -20,6 +20,7 @@ const siteDescription =
 
 const currentPath = Astro.url.pathname;
 const isStaging = Astro.url.hostname.includes("staging") || Astro.url.hostname.endsWith(".workers.dev");
+const isHome = currentPath === "/" || currentPath === "";
 ---
 
 <!doctype html>
@@ -30,6 +31,22 @@ const isStaging = Astro.url.hostname.includes("staging") || Astro.url.hostname.e
     <title>{fullTitle}</title>
     <meta name="description" content={siteDescription} />
     <link rel="canonical" href={Astro.url.href} />
+    <!-- Fonts: preconnect + non-blocking load (was a render-blocking @import) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inclusive+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inclusive+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      />
+    </noscript>
+    {isHome && <link rel="preload" as="image" href="/images/brewhemia-hero-800.webp" imagesrcset="/images/brewhemia-hero-800.webp 800w, /images/brewhemia-hero.webp 1500w" imagesizes="100vw" fetchpriority="high" />}
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={siteDescription} />
     <meta property="og:type" content="website" />
