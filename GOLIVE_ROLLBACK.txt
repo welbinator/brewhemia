@@ -1,0 +1,21 @@
+# Brewhemia go-live rollback — captured before cutover
+# Zone: dfa8b551008986be10bc40d4d7a50189
+# To roll back: recreate these two proxied records, then remove the Worker custom domains.
+
+ROOT A record (brewhemia.com):
+  id:      d37b64e4c46185abbc24c767a1735fff
+  type:    A
+  name:    brewhemia.com
+  content: 168.119.121.111
+  proxied: true
+  ttl:     1
+
+WWW CNAME (www.brewhemia.com):
+  id:      4bb2c875af90a84f990bb3d5bd75981b
+  type:    CNAME
+  name:    www.brewhemia.com
+  content: brewhemia.com
+  proxied: true
+
+# NOT touched: all mail CNAMEs (smtp/imap/pop/email/autodiscover/etc), MX, TXT/SPF/DKIM/DMARC, dev, staging.
+# Worker being attached: brewhemia-staging
