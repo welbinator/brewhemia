@@ -58,12 +58,45 @@ async function parseBody(request) {
   return { data, interested };
 }
 
+// Spam gate: honeypot + submit-speed trap + content scoring.
+// Returns { spam: bool, reason: string }. Real submissions score 0.
+function spamCheck(data) {
+  // 1. Honeypot — hidden field only bots fill.
+  if (data.website_hp && String(data.website_hp).trim() !== "") {
+    return { spam: true, reason: "honeypot" };
+  }
+  // 2. Time trap — form render timestamp (ms). Humans take >3s; bots submit instantly.
+  const ts = parseInt(data.form_ts, 10);
+  if (ts && Number.isFinite(ts)) {
+    const elapsed = Date.now() - ts;
+    if (elapsed < 3000) return { spam: true, reason: "too-fast" };
+    if (elapsed > 1000 * 60 * 60 * 6) return { spam: true, reason: "stale" };
+  }
+  // 3. Content scoring across all free-text fields.
+  const blob = [data.name, data.email, data.subject, data.message, data.details, data.company]
+    .filter(Boolean).join(" \n ").toLowerCase();
+  let score = 0;
+  const linkCount = (blob.match(/https?:\/\/|www\.|\[url|<a\s/gi) || []).length;
+  if (linkCount >= 2) score += 2;
+  if (linkCount >= 4) score += 3;
+  if (/\b(viagra|cialis|casino|porn|crypto|bitcoin|forex|seo services|backlinks|loan|payday|escort|nude|xxx)\b/i.test(blob)) score += 3;
+  if (/\b(guaranteed|make money|work from home|weight loss|cheap meds|100% free)\b/i.test(blob)) score += 2;
+  if (/[а-яА-Я\u4e00-\u9fff]/.test(blob) && !/[a-z]/i.test(blob.replace(/[^a-zа-яА-Я\u4e00-\u9fff]/g, ""))) score += 2;
+  if (/(.)\1{9,}/.test(blob)) score += 2; // long char repeats
+  if (score >= 3) return { spam: true, reason: `content-score:${score}` };
+  return { spam: false, reason: "" };
+}
+
 async function handleContact(request, env) {
   const apiKey = env.BREVO_API_KEY;
   if (!apiKey) return json({ ok: false, error: "Email not configured." }, 500);
   const { data } = await parseBody(request);
   const { name, email, subject, message } = data;
   if (!name || !email || !message) return json({ ok: false, error: "Please fill in the required fields." }, 400);
+
+  // Spam gate — silently accept-and-drop so bots don't probe the rules.
+  const spam = spamCheck(data);
+  if (spam.spam) return json({ ok: true });
 
   const notifyHtml = `<div style="font-family:Arial,sans-serif;font-size:15px;color:#2b2b2b;line-height:1.6">
     <h2 style="margin:0 0 12px">New contact form submission</h2>
@@ -91,6 +124,10 @@ async function handleCatering(request, env) {
   const { data, interested } = await parseBody(request);
   const { name, email, phone, details } = data;
   if (!name || !email || !phone || !details) return json({ ok: false, error: "Please fill in the required fields." }, 400);
+
+  // Spam gate — silently accept-and-drop so bots don't probe the rules.
+  const spam = spamCheck(data);
+  if (spam.spam) return json({ ok: true });
 
   const notifyHtml = `<div style="font-family:Arial,sans-serif;font-size:15px;color:#2b2b2b;line-height:1.6">
     <h2 style="margin:0 0 12px">New catering request</h2>

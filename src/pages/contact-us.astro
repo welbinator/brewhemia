@@ -34,6 +34,11 @@ import Base from "../layouts/Base.astro";
       </div>
 
       <form class="contact-form" id="contact-form" name="contact" method="POST" action="/api/contact">
+        <div class="hp-field" aria-hidden="true">
+          <label for="website_hp">Website</label>
+          <input type="text" id="website_hp" name="website_hp" tabindex="-1" autocomplete="off" />
+        </div>
+        <input type="hidden" name="form_ts" id="contact-form-ts" value="" />
         <div class="form-group">
           <label for="name">Name <span class="required">*</span></label>
           <input type="text" id="name" name="name" required />
@@ -126,11 +131,14 @@ import Base from "../layouts/Base.astro";
   @media (max-width: 800px) {
     .contact-grid { grid-template-columns: 1fr; gap: var(--spacing-2xl); }
   }
+  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 </style>
 
 <script>
   const form = document.getElementById("contact-form") as HTMLFormElement | null;
   const status = document.getElementById("form-status");
+  const tsField = document.getElementById("contact-form-ts") as HTMLInputElement | null;
+  if (tsField) tsField.value = String(Date.now());
   if (form && status) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
