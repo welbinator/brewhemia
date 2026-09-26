@@ -53,6 +53,17 @@ const isHome = currentPath === "/" || currentPath === "";
     <meta property="og:site_name" content={siteTitle} />
     {image && <meta property="og:image" content={image} />}
     {isStaging && <meta name="robots" content="noindex, nofollow" />}
+    {!isStaging && (
+      <>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RTGLSYH4J"></script>
+        <script is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-4RTGLSYH4J');
+        </script>
+      </>
+    )}
   </head>
   <body>
     <!-- HEADER -->
