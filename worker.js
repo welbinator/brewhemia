@@ -5,7 +5,13 @@
  */
 
 const SENDER = { name: "Brewhemia", email: "info@brewhemia.com" };
-const NOTIFY = { name: "James Welbes", email: "james.welbes@gmail.com" };
+const NOTIFY = [
+  { email: "andreashriver@gmail.com" },
+  { email: "info@brewhemia.com" },
+  { email: "matt@brewhemia.com" },
+  { email: "steve@brewhemia.com" },
+  { email: "james.welbes@gmail.com" },
+];
 
 function esc(v) {
   return String(v ?? "")
@@ -67,7 +73,7 @@ async function handleContact(request, env) {
     <p><strong>Message:</strong><br/>${esc(message).replace(/\n/g, "<br/>")}</p></div>`;
 
   const notify = await sendBrevo(apiKey, {
-    sender: SENDER, to: [NOTIFY], replyTo: { email, name },
+    sender: SENDER, to: NOTIFY, replyTo: { email, name },
     subject: `New contact form: ${subject || name}`, htmlContent: notifyHtml,
   });
   if (!notify.ok) return json({ ok: false, error: "Send failed.", detail: await notify.text() }, 502);
@@ -98,7 +104,7 @@ async function handleCatering(request, env) {
     <p><strong>Details:</strong><br/>${esc(details).replace(/\n/g, "<br/>")}</p></div>`;
 
   const notify = await sendBrevo(apiKey, {
-    sender: SENDER, to: [NOTIFY], replyTo: { email, name },
+    sender: SENDER, to: NOTIFY, replyTo: { email, name },
     subject: `New catering request: ${name}${data.company ? " / " + data.company : ""}`, htmlContent: notifyHtml,
   });
   if (!notify.ok) return json({ ok: false, error: "Send failed.", detail: await notify.text() }, 502);
