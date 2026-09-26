@@ -147,12 +147,41 @@ async function notifyCommandCenter(env, lead) {
   } catch (_) { /* CC down — row already saved; ignore */ }
 }
 
+// Cloudflare Turnstile server-side verification. Returns true if the token is
+// valid (or if verification isn't configured, to fail-open on misconfig only).
+async function verifyTurnstile(env, token, ip) {
+  const secret = env.TURNSTILE_SECRET;
+  if (!secret) return true; // not configured — don't hard-block legit traffic
+  if (!token) return false;
+  try {
+    const form = new URLSearchParams();
+    form.append("secret", secret);
+    form.append("response", String(token));
+    if (ip) form.append("remoteip", ip);
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body: form,
+    });
+    const out = await res.json();
+    return out.success === true;
+  } catch (_) {
+    return false;
+  }
+}
+
 async function handleContact(request, env) {
   const apiKey = env.BREVO_API_KEY;
   if (!apiKey) return json({ ok: false, error: "Email not configured." }, 500);
   const { data } = await parseBody(request);
   const { name, email, subject, message } = data;
   if (!name || !email || !message) return json({ ok: false, error: "Please fill in the required fields." }, 400);
+
+  // Turnstile — reject bots. Failed/absent token = treat as spam (store, no email).
+  const tsOk = await verifyTurnstile(env, data["cf-turnstile-response"], request.headers.get("CF-Connecting-IP"));
+  if (!tsOk) {
+    await saveSubmission(env, { form_name: "contact", name, email, subject, message, is_spam: 1, spam_reason: "turnstile-failed" });
+    return json({ ok: true });
+  }
 
   // Spam gate — store spam rows (is_spam=1) but don't email or notify.
   const spam = spamCheck(data);
@@ -191,6 +220,14 @@ async function handleCatering(request, env) {
   const { data, interested } = await parseBody(request);
   const { name, email, phone, details } = data;
   if (!name || !email || !phone || !details) return json({ ok: false, error: "Please fill in the required fields." }, 400);
+
+  // Turnstile — reject bots. Failed/absent token = treat as spam (store, no email).
+  const tsOk = await verifyTurnstile(env, data["cf-turnstile-response"], request.headers.get("CF-Connecting-IP"));
+  if (!tsOk) {
+    await saveSubmission(env, { form_name: "catering", name, email, phone, message: details, company: data.company,
+      event_date: data["event-date"], guests: data.headcount, extra: { interested }, is_spam: 1, spam_reason: "turnstile-failed" });
+    return json({ ok: true });
+  }
 
   // Spam gate — store spam rows (is_spam=1) but don't email or notify.
   const spam = spamCheck(data);

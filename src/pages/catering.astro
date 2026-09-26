@@ -74,6 +74,7 @@ import Base from "../layouts/Base.astro";
       </div>
 
       <button type="submit" class="btn-submit">SEND CATERING REQUEST</button>
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAAFElAop_3ftSB6oF" data-theme="light" style="margin-top:1rem"></div>
       <p class="form-status" id="catering-status" role="status" aria-live="polite"></p>
     </form>
   </section>
@@ -167,10 +168,18 @@ import Base from "../layouts/Base.astro";
       cstatus.textContent = "";
       btn.disabled = true;
       btn.textContent = "SENDING…";
+      const cfd = new FormData(cform);
+      if (!cfd.get("cf-turnstile-response")) {
+        cstatus.className = "form-status error";
+        cstatus.textContent = "Please complete the anti-spam check above.";
+        btn.disabled = false;
+        btn.textContent = "SEND CATERING REQUEST";
+        return;
+      }
       try {
         const res = await fetch("/api/catering", {
           method: "POST",
-          body: new FormData(cform),
+          body: cfd,
         });
         const data = await res.json().catch(() => ({}));
         if (res.ok && data.ok) {
@@ -187,7 +196,9 @@ import Base from "../layouts/Base.astro";
       } finally {
         btn.disabled = false;
         btn.textContent = "SEND CATERING REQUEST";
+        if ((window as any).turnstile) (window as any).turnstile.reset();
       }
     });
   }
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>

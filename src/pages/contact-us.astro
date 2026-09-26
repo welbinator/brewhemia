@@ -177,7 +177,9 @@ import Base from "../layouts/Base.astro";
       } finally {
         btn.disabled = false;
         btn.textContent = "SEND MESSAGE";
+        if ((window as any).turnstile) (window as any).turnstile.reset();
       }
     });
   }
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
