@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import { withBase } from "../lib/base";
 export const prerender = true;
 ---
 
@@ -9,8 +10,8 @@ export const prerender = true;
 		<h1>Page not found</h1>
 		<p>The page you're looking for doesn't exist or has been moved.</p>
 		<div class="not-found-actions">
-			<a href="/" class="btn btn-primary btn-lg">Go home</a>
-			<a href="/contact-us" class="btn btn-secondary btn-lg">Contact us</a>
+			<a href={withBase("/")} class="btn btn-primary btn-lg">Go home</a>
+			<a href={withBase("/contact-us")} class="btn btn-secondary btn-lg">Contact us</a>
 		</div>
 	</div>
 </Base>

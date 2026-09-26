@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import { withBase } from "../lib/base";
 
 const features = [
   {
@@ -49,7 +50,7 @@ const reviews = [
   <!-- HERO -->
   <section class="hero">
     <div class="hero-media">
-      <img src="/images/brewhemia-hero.webp" srcset="/images/brewhemia-hero-800.webp 800w, /images/brewhemia-hero.webp 1500w" sizes="100vw" width="1500" height="633" alt="Inside Brewhemia café — espresso bar, exposed brick, morning light" loading="eager" fetchpriority="high" decoding="async" />
+      <img src={withBase("/images/brewhemia-hero.webp")} srcset={`${withBase("/images/brewhemia-hero-800.webp")} 800w, ${withBase("/images/brewhemia-hero.webp")} 1500w`} sizes="100vw" width="1500" height="633" alt="Inside Brewhemia café — espresso bar, exposed brick, morning light" loading="eager" fetchpriority="high" decoding="async" />
     </div>
     <div class="hero-panel">
       <span class="hero-kicker">Est. New Bohemia · Cedar Rapids, IA</span>
@@ -57,7 +58,7 @@ const reviews = [
       <p>Amazing coffee, scratch-made breakfast & lunch, and a full bar — served inside the historic ZCBJ Hall since day one.</p>
       <div class="hero-actions">
         <a href="https://order.toasttab.com/online/brewhemia-1202-3rd-st-se-ste-101" target="_blank" rel="noopener noreferrer" class="btn-primary">ORDER ONLINE</a>
-        <a href="/menu" class="btn-ghost">SEE THE MENU</a>
+        <a href={withBase("/menu")} class="btn-ghost">SEE THE MENU</a>
       </div>
       <div class="hero-rating">
         <span class="stars">★★★★★</span>
@@ -77,7 +78,7 @@ const reviews = [
       <span class="mono-label">Open · Tue–Sun · 8am–2pm</span>
       <h2>We took the best of an American café and gave it a European twist.</h2>
       <p>Brewhemia is a name that encompasses a focus on quality beverage while embracing the community and neighborhood of New Bohemia. Come for the coffee, stay for the biscuits and gravy, come back for a glass of wine.</p>
-      <a href="/about-us" class="text-link">Read our story →</a>
+      <a href={withBase("/about-us")} class="text-link">Read our story →</a>
     </div>
   </section>
 
@@ -85,8 +86,8 @@ const reviews = [
   <section class="features">
     <div class="features-grid">
       {features.map((f) => (
-        <a href={f.href} class="feature-card">
-          <div class="feature-img"><img src={f.img} alt={f.title} loading="lazy" /></div>
+        <a href={withBase(f.href)} class="feature-card">
+          <div class="feature-img"><img src={withBase(f.img)} alt={f.title} loading="lazy" /></div>
           <div class="feature-body">
             <span class="feature-kicker">{f.kicker}</span>
             <h3>{f.title}</h3>

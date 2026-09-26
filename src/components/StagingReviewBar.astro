@@ -1,0 +1,203 @@
+---
+/**
+ * Staging-only floating review bar.
+ * Included from Base.astro only when building with PAGES_BASE (GitHub Pages).
+ * Never ships on the live Cloudflare root build.
+ *
+ * Shows when URL has ?review=<token>. Posts to live Worker API (CORS).
+ */
+const REVIEW_API = "https://brewhemia.com/api/support/review";
+const SUPPORT_URL = "https://cc.brewhemia.com/";
+---
+
+<div id="bh-review-root" hidden></div>
+
+<script is:inline define:vars={{ REVIEW_API, SUPPORT_URL }}>
+(function () {
+	try {
+		var params = new URLSearchParams(window.location.search);
+		var token = params.get("review") || params.get("t") || "";
+		if (!token) {
+			var badge = document.createElement("div");
+			badge.id = "bh-staging-badge";
+			badge.textContent = "Preview site — not live";
+			badge.setAttribute("role", "status");
+			document.documentElement.appendChild(badge);
+			var bs = document.createElement("style");
+			bs.textContent =
+				"#bh-staging-badge{position:fixed;top:10px;left:10px;z-index:99998;background:#3a2a1a;color:#f5e6d3;font:600 12px/1.2 system-ui,sans-serif;padding:6px 10px;border-radius:999px;box-shadow:0 4px 16px rgba(0,0,0,.25);opacity:.92}";
+			document.head.appendChild(bs);
+			return;
+		}
+
+		var style = document.createElement("style");
+		style.textContent = [
+			"#bh-review-bar{position:fixed;left:0;right:0;bottom:0;z-index:99999;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#2b2b2b}",
+			"#bh-review-bar *{box-sizing:border-box}",
+			"#bh-review-panel{margin:0 auto;max-width:720px;background:#fffdfb;border:1px solid #e0d3c4;border-bottom:none;border-radius:14px 14px 0 0;box-shadow:0 -8px 32px rgba(58,42,26,.18);padding:14px 16px 16px}",
+			"#bh-review-bar h2{margin:0 0 4px;font-size:15px;font-weight:700}",
+			"#bh-review-bar p{margin:0 0 12px;font-size:13px;line-height:1.45;color:#6b5a48}",
+			"#bh-review-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}",
+			"#bh-review-bar button,#bh-review-bar a.bh-link{appearance:none;border-radius:10px;font:600 13px/1 system-ui,sans-serif;padding:11px 14px;cursor:pointer;border:1px solid transparent;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}",
+			"#bh-review-approve{background:#15803d;color:#fff}",
+			"#bh-review-approve:hover{background:#166534}",
+			"#bh-review-approve:disabled{opacity:.6;cursor:not-allowed}",
+			"#bh-review-changes{background:#fff;color:#2b2b2b;border-color:#e0d3c4}",
+			"#bh-review-changes:hover{background:#faf5ef}",
+			"#bh-review-changes:disabled{opacity:.6;cursor:not-allowed}",
+			"a.bh-link{background:transparent;color:#6b5a48;border-color:#ece2d6;font-weight:500}",
+			"#bh-review-form{display:none;margin-top:12px;padding-top:12px;border-top:1px solid #ece2d6}",
+			"#bh-review-form.is-open{display:block}",
+			"#bh-review-form label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;color:#6b5a48}",
+			"#bh-review-reason{width:100%;min-height:88px;resize:vertical;border:1px solid #e0d3c4;border-radius:10px;padding:10px 12px;font:14px/1.4 system-ui,sans-serif;color:#2b2b2b;background:#fff}",
+			"#bh-review-form-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}",
+			"#bh-review-submit{background:#c46500;color:#fff}",
+			"#bh-review-submit:hover{background:#a34e00}",
+			"#bh-review-submit:disabled{opacity:.6;cursor:not-allowed}",
+			"#bh-review-cancel{background:#fff;border-color:#e0d3c4;color:#6b5a48}",
+			"#bh-review-status{margin-top:10px;font-size:13px;min-height:1.2em}",
+			"#bh-review-status.is-err{color:#b91c1c}",
+			"#bh-review-status.is-ok{color:#15803d}",
+			"#bh-review-done{display:none;padding:8px 0 2px}",
+			"#bh-review-done.is-show{display:block}",
+			"body{padding-bottom:120px}",
+			"@media (max-width:560px){#bh-review-actions{flex-direction:column;align-items:stretch}#bh-review-bar button,a.bh-link{width:100%}}",
+		].join("");
+		document.head.appendChild(style);
+
+		var root = document.createElement("div");
+		root.id = "bh-review-bar";
+		root.setAttribute("role", "region");
+		root.setAttribute("aria-label", "Preview review");
+		root.innerHTML =
+			'<div id="bh-review-panel">' +
+			"<h2>Preview ready for your review</h2>" +
+			"<p>This is a private staging site — not the live website. Approve to go live, or request changes and tell us what to fix.</p>" +
+			'<div id="bh-review-main">' +
+			'<div id="bh-review-actions">' +
+			'<button type="button" id="bh-review-approve">I approve these changes</button>' +
+			'<button type="button" id="bh-review-changes">Request changes</button>' +
+			'<a class="bh-link" href="' +
+			SUPPORT_URL +
+			'" target="_blank" rel="noopener">Open support thread</a>' +
+			"</div>" +
+			'<div id="bh-review-form">' +
+			'<label for="bh-review-reason">What didn’t you like? What should we change?</label>' +
+			'<textarea id="bh-review-reason" maxlength="8000" placeholder="Be specific if you can — page, text, photo, layout…"></textarea>' +
+			'<div id="bh-review-form-actions">' +
+			'<button type="button" id="bh-review-submit">Send feedback</button>' +
+			'<button type="button" id="bh-review-cancel">Cancel</button>' +
+			"</div></div>" +
+			'<div id="bh-review-status" aria-live="polite"></div>' +
+			"</div>" +
+			'<div id="bh-review-done"></div>' +
+			"</div>";
+		document.documentElement.appendChild(root);
+
+		var approveBtn = document.getElementById("bh-review-approve");
+		var changesBtn = document.getElementById("bh-review-changes");
+		var form = document.getElementById("bh-review-form");
+		var reasonEl = document.getElementById("bh-review-reason");
+		var submitBtn = document.getElementById("bh-review-submit");
+		var cancelBtn = document.getElementById("bh-review-cancel");
+		var statusEl = document.getElementById("bh-review-status");
+		var mainEl = document.getElementById("bh-review-main");
+		var doneEl = document.getElementById("bh-review-done");
+
+		function setStatus(kind, msg) {
+			if (!statusEl) return;
+			statusEl.className = kind === "err" ? "is-err" : kind === "ok" ? "is-ok" : "";
+			statusEl.textContent = msg || "";
+		}
+
+		function finish(html) {
+			if (mainEl) mainEl.style.display = "none";
+			if (doneEl) {
+				doneEl.className = "is-show";
+				doneEl.innerHTML = html;
+			}
+		}
+
+		function post(action, reason) {
+			return fetch(REVIEW_API, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ token: token, action: action, reason: reason || "" }),
+			}).then(function (r) {
+				return r.json().then(function (data) {
+					if (!r.ok || !data.ok) {
+						throw new Error((data && data.error) || "Request failed");
+					}
+					return data;
+				});
+			});
+		}
+
+		approveBtn &&
+			approveBtn.addEventListener("click", function () {
+				if (!window.confirm("Approve this preview and ask us to push it live?")) return;
+				approveBtn.disabled = true;
+				if (changesBtn) changesBtn.disabled = true;
+				setStatus("", "Submitting…");
+				post("approve")
+					.then(function () {
+						finish(
+							"<p><strong>Approved — thank you.</strong> We’ll push this live next and update your support thread when it’s done.</p>" +
+								'<p style="margin-top:8px"><a class="bh-link" href="' +
+								SUPPORT_URL +
+								'" target="_blank" rel="noopener">Open support thread</a></p>'
+						);
+					})
+					.catch(function (err) {
+						setStatus("err", (err && err.message) || "Could not approve");
+						approveBtn.disabled = false;
+						if (changesBtn) changesBtn.disabled = false;
+					});
+			});
+
+		changesBtn &&
+			changesBtn.addEventListener("click", function () {
+				if (form) form.classList.add("is-open");
+				setStatus("", "");
+				reasonEl && reasonEl.focus();
+			});
+
+		cancelBtn &&
+			cancelBtn.addEventListener("click", function () {
+				if (form) form.classList.remove("is-open");
+				if (reasonEl) reasonEl.value = "";
+				setStatus("", "");
+			});
+
+		submitBtn &&
+			submitBtn.addEventListener("click", function () {
+				var reason = (reasonEl && reasonEl.value ? reasonEl.value : "").trim();
+				if (reason.length < 3) {
+					setStatus("err", "Please explain what you’d like changed.");
+					return;
+				}
+				submitBtn.disabled = true;
+				if (approveBtn) approveBtn.disabled = true;
+				if (changesBtn) changesBtn.disabled = true;
+				setStatus("", "Sending…");
+				post("disapprove", reason)
+					.then(function () {
+						finish(
+							"<p><strong>Feedback sent.</strong> We’ll revise the preview and let you know when it’s ready to review again.</p>" +
+								'<p style="margin-top:8px"><a class="bh-link" href="' +
+								SUPPORT_URL +
+								'" target="_blank" rel="noopener">Open support thread</a></p>'
+						);
+					})
+					.catch(function (err) {
+						setStatus("err", (err && err.message) || "Could not send feedback");
+						submitBtn.disabled = false;
+						if (approveBtn) approveBtn.disabled = false;
+						if (changesBtn) changesBtn.disabled = false;
+					});
+			});
+	} catch (e) {
+		/* never break the staging page */
+	}
+})();
+</script>

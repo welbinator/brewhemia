@@ -1,6 +1,8 @@
 ---
 import "../styles/tokens.css";
 import "../styles/theme.css";
+import { withBase } from "../lib/base";
+import StagingReviewBar from "../components/StagingReviewBar.astro";
 
 interface Props {
   title?: string;
@@ -21,6 +23,8 @@ const siteDescription =
 const currentPath = Astro.url.pathname;
 const isStaging = Astro.url.hostname.includes("staging") || Astro.url.hostname.endsWith(".workers.dev");
 const isHome = currentPath === "/" || currentPath === "";
+// Staging build = GitHub Pages project mount (base != "/"). Only then ship the review bar.
+const isStagingBuild = Boolean(import.meta.env.BASE_URL && import.meta.env.BASE_URL !== "/");
 ---
 
 <!doctype html>
@@ -46,7 +50,7 @@ const isHome = currentPath === "/" || currentPath === "";
         href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inclusive+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500;600&display=swap"
       />
     </noscript>
-    {isHome && <link rel="preload" as="image" href="/images/brewhemia-hero-800.webp" imagesrcset="/images/brewhemia-hero-800.webp 800w, /images/brewhemia-hero.webp 1500w" imagesizes="100vw" fetchpriority="high" />}
+    {isHome && <link rel="preload" as="image" href={withBase("/images/brewhemia-hero-800.webp")} imagesrcset={`${withBase("/images/brewhemia-hero-800.webp")} 800w, ${withBase("/images/brewhemia-hero.webp")} 1500w`} imagesizes="100vw" fetchpriority="high" />}
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={siteDescription} />
     <meta property="og:type" content="website" />
@@ -69,14 +73,14 @@ const isHome = currentPath === "/" || currentPath === "";
     <!-- HEADER -->
     <header class="site-header">
       <div class="header-inner">
-        <a href="/" class="site-logo">brewhemia<span class="logo-dot">.</span></a>
+        <a href={withBase("/")} class="site-logo">brewhemia<span class="logo-dot">.</span></a>
         <nav class="primary-nav">
           <ul>
-            <li><a href="/about-us" class:list={[{ active: currentPath.startsWith('/about-us') }]}>ABOUT</a></li>
-            <li><a href="/menu" class:list={[{ active: currentPath.startsWith('/menu') }]}>MENU</a></li>
-            <li><a href="/catering" class:list={[{ active: currentPath.startsWith('/catering') }]}>CATERING</a></li>
-            <li><a href="/events" class:list={[{ active: currentPath.startsWith('/events') }]}>EVENTS</a></li>
-            <li><a href="/contact-us" class:list={[{ active: currentPath.startsWith('/contact-us') }]}>CONTACT</a></li>
+            <li><a href={withBase("/about-us")} class:list={[{ active: currentPath.startsWith('/about-us') }]}>ABOUT</a></li>
+            <li><a href={withBase("/menu")} class:list={[{ active: currentPath.startsWith('/menu') }]}>MENU</a></li>
+            <li><a href={withBase("/catering")} class:list={[{ active: currentPath.startsWith('/catering') }]}>CATERING</a></li>
+            <li><a href={withBase("/events")} class:list={[{ active: currentPath.startsWith('/events') }]}>EVENTS</a></li>
+            <li><a href={withBase("/contact-us")} class:list={[{ active: currentPath.startsWith('/contact-us') }]}>CONTACT</a></li>
             <li><a href="https://order.toasttab.com/online/brewhemia-1202-3rd-st-se-ste-101" target="_blank" rel="noopener noreferrer" class="btn-order">ORDER ONLINE</a></li>
           </ul>
         </nav>
@@ -87,7 +91,7 @@ const isHome = currentPath === "/" || currentPath === "";
     {bannerTitle && (
       <div class="page-banner">
         {bannerImage && (
-          <div class="page-banner-media" style={`background-image: url('${bannerImage}')`}></div>
+          <div class="page-banner-media" style={`background-image: url('${withBase(bannerImage)}')`}></div>
         )}
         <div class="page-banner-inner">
           {bannerKicker && <span class="banner-kicker">{bannerKicker}</span>}
@@ -100,6 +104,8 @@ const isHome = currentPath === "/" || currentPath === "";
     <main>
       <slot />
     </main>
+
+    {isStagingBuild && <StagingReviewBar />}
 
     <!-- FOOTER -->
     <footer class="site-footer">
