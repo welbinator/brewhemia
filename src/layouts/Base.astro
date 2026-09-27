@@ -22,6 +22,55 @@ const siteDescription =
 
 const currentPath = Astro.url.pathname;
 const isStaging = Astro.url.hostname.includes("staging") || Astro.url.hostname.endsWith(".workers.dev");
+
+// LocalBusiness structured data (production only). Powers Google local/knowledge-panel results.
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "@id": "https://brewhemia.com/#business",
+  name: "Brewhemia",
+  description:
+    "Family-owned café and bar in the historic ZCBJ Hall, New Bohemia District, Cedar Rapids — coffee, espresso, scratch-made breakfast & lunch, beer, wine and spirits.",
+  url: "https://brewhemia.com",
+  telephone: "+1-319-364-0802",
+  email: "info@brewhemia.com",
+  image: "https://brewhemia.com/images/brewhemia-hero.webp",
+  priceRange: "$$",
+  servesCuisine: ["Coffee", "Breakfast", "Lunch", "American"],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "1202 3rd St SE",
+    addressLocality: "Cedar Rapids",
+    addressRegion: "IA",
+    postalCode: "52401",
+    addressCountry: "US",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 41.9702617,
+    longitude: -91.6577068,
+  },
+  hasMap: "https://maps.google.com/?q=1202+3rd+St+SE+Cedar+Rapids+Iowa+52401",
+  sameAs: ["https://www.facebook.com/brewhemia"],
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
+      opens: "08:00",
+      closes: "14:00",
+    },
+  ],
+  acceptsReservations: false,
+  menu: "https://brewhemia.com/menu/",
+};
+
 const isHome = currentPath === "/" || currentPath === "";
 // Staging build = GitHub Pages project mount (base != "/"). Only then ship the review bar.
 const isStagingBuild = Boolean(import.meta.env.BASE_URL && import.meta.env.BASE_URL !== "/");
@@ -57,6 +106,9 @@ const isStagingBuild = Boolean(import.meta.env.BASE_URL && import.meta.env.BASE_
     <meta property="og:site_name" content={siteTitle} />
     {image && <meta property="og:image" content={image} />}
     {isStaging && <meta name="robots" content="noindex, nofollow" />}
+    {!isStagingBuild && (
+      <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    )}
     {!isStaging && (
       <>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RTGLSYH4J"></script>
