@@ -16,6 +16,12 @@
   --color-sandstone: #cbbbb4;
   --color-coffee-dust: #977e77;
 
+  /* ---- Fixed tokens (do NOT flip in dark mode) ---- */
+  /* Used for always-dark surfaces (footer, tagline strip, button hovers)
+     and always-light text/borders sitting on brand/dark surfaces. */
+  --ink-fixed: #1c1613;
+  --paper-fixed: #fffdfb;
+
   /* ---- Semantic aliases (used across pages) ---- */
   --color-brand: var(--color-burnt-orange);
   --color-brand-strong: var(--color-amber-ink);

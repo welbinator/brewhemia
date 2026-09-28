@@ -1,2 +1,80 @@
-/* Brewhemia Theme — no dark mode */
-/* All color rules are static (no light-dark()) because Brewhemia is light-only */
+/* Brewhemia Theme — light + dark mode
+   ------------------------------------------------------------------
+   The pages reference the RAW palette tokens directly (e.g.
+   var(--color-espresso) for text, var(--color-cream-paper) for page bg).
+   Dark mode remaps those raw tokens so the whole site inverts with no
+   per-page edits. Surfaces that must stay dark/light in BOTH modes
+   (footer, tagline strip, buttons) use the fixed tokens --ink-fixed /
+   --paper-fixed instead (patched into the relevant rules).
+
+   Toggle is driven by <html data-theme="dark"> (set by an inline
+   no-flash script + the header button). Respects prefers-color-scheme
+   for first-time visitors who haven't chosen. */
+
+:root {
+  color-scheme: light;
+  --toggle-track: var(--color-taupe-hairline);
+  --toggle-knob: var(--color-espresso);
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* ---- Neutrals: invert the paper/ink ramp ---- */
+  --color-espresso: #f2e8e1;             /* primary text -> warm off-white */
+  --color-cream-paper: #17120f;          /* page background -> near-black espresso */
+  --color-linen-beige: #211a16;          /* raised surface -> dark warm */
+  --color-taupe-hairline: #3a2f28;       /* hairlines/borders -> dark warm */
+  --color-sandstone: #4a3d35;
+  --color-coffee-dust: #b39a8f;          /* muted text -> lighter so it stays legible */
+
+  /* ---- Brand: brighten slightly so orange pops on dark ---- */
+  --color-burnt-orange: #ff5a2b;
+  --color-amber-ink: #ff8a3d;
+  --color-marigold-wash: #febf6f;
+
+  /* ---- Footer stays dark in both modes; nudge so it reads as a
+          distinct band against the now-dark page ---- */
+  --color-footer-bg: #0f0b09;
+  --color-footer-text: #e7d8cf;
+  --color-footer-heading: #fffdfb;
+
+  --toggle-track: #3a2f28;
+  --toggle-knob: #febf6f;
+}
+
+/* Smooth the flip (but not on first paint / reduced motion) */
+html.theme-ready body,
+html.theme-ready .site-header,
+html.theme-ready .site-footer,
+html.theme-ready .feature-card,
+html.theme-ready .review-card,
+html.theme-ready .page-banner {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-ready * { transition: none !important; }
+}
+
+/* ---- Theme toggle button (in header) ---- */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--color-taupe-hairline);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-espresso);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+  padding: 0;
+}
+.theme-toggle:hover { border-color: var(--color-burnt-orange); color: var(--color-burnt-orange); }
+.theme-toggle svg { width: 18px; height: 18px; display: block; }
+/* Show sun in dark mode (click -> go light), moon in light mode (click -> go dark) */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
