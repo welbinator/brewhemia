@@ -277,6 +277,28 @@ const isStagingBuild = Boolean(import.meta.env.BASE_URL && import.meta.env.BASE_
             if (window.innerWidth > 768) setOpen(false);
           });
         }
+
+        // ---- Scroll reveal animations (sitewide) ----
+        var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var revealEls = document.querySelectorAll(".reveal");
+        if (prefersReduced || !("IntersectionObserver" in window)) {
+          revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+        } else {
+          // Stagger siblings that share a parent for a gentle cascade.
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                var el = entry.target;
+                var sibs = el.parentElement ? Array.prototype.slice.call(el.parentElement.querySelectorAll(":scope > .reveal")) : [el];
+                var idx = sibs.indexOf(el);
+                el.style.transitionDelay = (idx > 0 ? Math.min(idx, 6) * 80 : 0) + "ms";
+                el.classList.add("is-visible");
+                io.unobserve(el);
+              }
+            });
+          }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+          revealEls.forEach(function (el) { io.observe(el); });
+        }
       })();
     </script>
   </body>
@@ -284,6 +306,25 @@ const isStagingBuild = Boolean(import.meta.env.BASE_URL && import.meta.env.BASE_
 
 <style is:global>
   @layer base;
+
+  /* ---- Scroll reveal (sitewide, tasteful) ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  html.theme-ready .reveal {
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .hero-media img { animation: none !important; }
+    .hero-scroll span { animation: none !important; }
+  }
 
   @layer base {
     *, *::before, *::after {

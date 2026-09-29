@@ -16,7 +16,7 @@ const menus = [
   bannerImage="/images/grilled-cheese-and-soup.webp"
 >
   <section class="menu">
-    <div class="menu-callout">
+    <div class="menu-callout reveal">
       <div>
         <span class="mono-label">Catering & events</span>
         <p>Want to talk catering, coffee, breakfast or lunch for your office or event? Call or text Andrea at <a href="tel:3193893595">319-389-3595</a> or email <a href="mailto:info@brewhemia.com">info@brewhemia.com</a>.</p>
@@ -26,7 +26,7 @@ const menus = [
 
     <div class="menu-grid">
       {menus.map((m, i) => (
-        <div class="menu-card">
+        <div class="menu-card reveal">
           <div class="menu-card-head">
             <span class="menu-num">{String(i + 1).padStart(2, "0")}</span>
             <div>
