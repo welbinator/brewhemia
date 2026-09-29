@@ -43,6 +43,16 @@ const reviews = [
     name: "Trevor H.",
     meta: "Google review",
   },
+  {
+    quote: "While visiting friends, we stopped here for coffee. The staff were friendly and attentive. The place was clean and offers a comfortable atmosphere.",
+    name: "David K.",
+    meta: "Google review",
+  },
+  {
+    quote: "A surprising vegan hot spot! I stopped by Brewhemia for a friend's bachelorette day. As a former Midwesterner, I wasn't expecting much in the way of vegan options.",
+    name: "Kelly P.",
+    meta: "Yelp review",
+  },
 ];
 ---
 
@@ -110,14 +120,23 @@ const reviews = [
       <span class="mono-label reveal">From the neighborhood</span>
       <h2 class="reveal">Beloved in Cedar Rapids.</h2>
     </div>
-    <div class="reviews-grid">
-      {reviews.map((r) => (
-        <figure class="review-card reveal">
-          <div class="review-stars">★★★★★</div>
-          <blockquote>{r.quote}</blockquote>
-          <figcaption><span class="review-name">{r.name}</span><span class="review-meta">{r.meta}</span></figcaption>
-        </figure>
-      ))}
+    <div class="reviews-carousel reveal" data-review-carousel>
+      <button class="rc-arrow rc-prev" data-rc-prev aria-label="Previous review">‹</button>
+      <div class="rc-stage">
+        {reviews.map((r, i) => (
+          <figure class="review-card" data-rc-card data-index={i}>
+            <div class="review-stars">★★★★★</div>
+            <blockquote>{r.quote}</blockquote>
+            <figcaption><span class="review-name">{r.name}</span><span class="review-meta">{r.meta}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+      <button class="rc-arrow rc-next" data-rc-next aria-label="Next review">›</button>
+      <div class="rc-dots" data-rc-dots>
+        {reviews.map((_, i) => (
+          <button class="rc-dot" data-rc-dot data-index={i} aria-label={`Go to review ${i + 1}`}></button>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -132,6 +151,50 @@ const reviews = [
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    (function () {
+      var root = document.querySelector("[data-review-carousel]");
+      if (!root) return;
+      var cards = Array.prototype.slice.call(root.querySelectorAll("[data-rc-card]"));
+      var dots = Array.prototype.slice.call(root.querySelectorAll("[data-rc-dot]"));
+      var prev = root.querySelector("[data-rc-prev]");
+      var next = root.querySelector("[data-rc-next]");
+      var n = cards.length;
+      if (!n) return;
+      var current = Math.floor(n / 2); // start with a middle review featured
+      var timer = null;
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function render() {
+        cards.forEach(function (card, i) {
+          var pos;
+          if (i === current) pos = "center";
+          else if (i === (current - 1 + n) % n) pos = "left";
+          else if (i === (current + 1) % n) pos = "right";
+          else pos = "hidden";
+          card.setAttribute("data-pos", pos);
+        });
+        dots.forEach(function (d, i) { d.classList.toggle("is-active", i === current); });
+      }
+      function go(i) { current = (i + n) % n; render(); }
+      function start() {
+        if (reduce || timer) return;
+        timer = setInterval(function () { go(current + 1); }, 5000);
+      }
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+      function restart() { stop(); start(); }
+
+      next.addEventListener("click", function () { go(current + 1); restart(); });
+      prev.addEventListener("click", function () { go(current - 1); restart(); });
+      dots.forEach(function (d, i) { d.addEventListener("click", function () { go(i); restart(); }); });
+      root.addEventListener("mouseenter", stop);
+      root.addEventListener("mouseleave", start);
+
+      render();
+      start();
+    })();
+  </script>
 </Base>
 
 <style>
@@ -356,8 +419,22 @@ const reviews = [
   .reviews-head { text-align: center; margin-bottom: var(--spacing-2xl); }
   .reviews-head .mono-label { display: block; margin-bottom: var(--spacing-sm); color: var(--color-brand-red); }
   .reviews-head h2 { font-size: var(--font-size-3xl); }
-  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-lg); }
+
+  /* ---- Reviews coverflow carousel ---- */
+  .reviews-carousel { position: relative; }
+  .rc-stage {
+    position: relative;
+    height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
   .review-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(440px, 82vw);
     background: var(--color-cream-paper);
     border: 1px solid var(--color-taupe-hairline);
     border-radius: var(--radius-lg);
@@ -365,7 +442,14 @@ const reviews = [
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease, filter 0.6s ease;
+    will-change: transform, opacity;
   }
+  /* stacking positions set via data-pos */
+  .review-card[data-pos="center"] { transform: translate(-50%, -50%) scale(1);    opacity: 1;    z-index: 3; filter: none; }
+  .review-card[data-pos="left"]   { transform: translate(-118%, -50%) scale(0.8); opacity: 0.5; z-index: 2; filter: brightness(0.85); }
+  .review-card[data-pos="right"]  { transform: translate(18%, -50%) scale(0.8);   opacity: 0.5; z-index: 2; filter: brightness(0.85); }
+  .review-card[data-pos="hidden"] { transform: translate(-50%, -50%) scale(0.6);  opacity: 0;   z-index: 1; pointer-events: none; }
   .review-card .review-stars { font-size: var(--font-size-sm); }
   .review-card blockquote {
     font-family: var(--font-display);
@@ -374,6 +458,7 @@ const reviews = [
     color: var(--color-espresso);
     letter-spacing: -0.01em;
   }
+  .review-card[data-pos="center"] blockquote { font-size: 1.32rem; }
   .review-card figcaption { display: flex; flex-direction: column; margin-top: auto; }
   .review-name { font-weight: 600; font-size: var(--font-size-sm); color: var(--color-espresso); }
   .review-meta {
@@ -382,6 +467,36 @@ const reviews = [
     letter-spacing: 0.04em;
     color: var(--color-coffee-dust);
   }
+  .rc-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--color-taupe-hairline);
+    background: var(--color-cream-paper);
+    color: var(--color-espresso);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .rc-arrow:hover { background: var(--color-brand-red); color: #fff; border-color: var(--color-brand-red); }
+  .rc-prev { left: 0; }
+  .rc-next { right: 0; }
+  .rc-dots { display: flex; justify-content: center; gap: 8px; margin-top: var(--spacing-xl); }
+  .rc-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    border: none; padding: 0; cursor: pointer;
+    background: var(--color-taupe-hairline);
+    transition: background 0.25s, transform 0.25s;
+  }
+  .rc-dot.is-active { background: var(--color-brand-red); transform: scale(1.25); }
 
   /* ---------- CTA BAND ---------- */
   .cta-band { margin-top: var(--spacing-5xl); background: var(--color-linen-beige); border-top: 1px solid var(--color-taupe-hairline); border-bottom: 1px solid var(--color-taupe-hairline); }
@@ -396,6 +511,11 @@ const reviews = [
   @media (max-width: 900px) {
     .hero { min-height: calc(100svh - 64px); padding-bottom: var(--spacing-3xl); }
     .hero-panel h1 { font-size: clamp(2.2rem, 9vw, 3rem); }
-    .features-grid, .reviews-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+    /* Carousel: show only the centered card on small screens */
+    .rc-stage { height: 400px; }
+    .review-card[data-pos="left"], .review-card[data-pos="right"] { opacity: 0; pointer-events: none; }
+    .review-card { width: min(440px, 88vw); }
+    .rc-arrow { width: 38px; height: 38px; font-size: 1.4rem; }
   }
 </style>
