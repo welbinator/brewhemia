@@ -6,7 +6,7 @@
 :root {
   /* ---- Little Amps palette ---- */
   --color-espresso: #1c1613;
-  --color-burnt-orange: #c03001;
+  --color-brand-red: #d60000;
   --color-amber-ink: #c46500;
   --color-marigold-wash: #febf6f;
   --color-dusty-blue: #89b4ca;
@@ -23,7 +23,7 @@
   --paper-fixed: #fffdfb;
 
   /* ---- Semantic aliases (used across pages) ---- */
-  --color-brand: var(--color-burnt-orange);
+  --color-brand: var(--color-brand-red);
   --color-brand-strong: var(--color-amber-ink);
   --color-bg: var(--color-cream-paper);
   --color-surface: var(--color-linen-beige);

@@ -68,14 +68,14 @@ import Base from "../layouts/Base.astro";
   .contact { max-width: var(--wide-width); margin: var(--spacing-4xl) auto 0; padding: 0 var(--spacing-xl); }
   .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--spacing-4xl); align-items: start; }
 
-  .contact-info .mono-label { display: block; color: var(--color-burnt-orange); margin-bottom: var(--spacing-sm); }
+  .contact-info .mono-label { display: block; color: var(--color-brand-red); margin-bottom: var(--spacing-sm); }
   .contact-info h2 { font-size: var(--font-size-3xl); margin-bottom: var(--spacing-md); }
   .contact-info > p { font-size: var(--font-size-lg); color: var(--color-espresso); line-height: 1.7; margin-bottom: var(--spacing-xl); }
 
   .info-block { padding: var(--spacing-md) 0; border-top: 1px solid var(--color-taupe-hairline); }
   .info-label { font-family: var(--font-mono); font-size: var(--font-size-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-coffee-dust); }
   .info-block p { margin-top: 4px; color: var(--color-espresso); line-height: 1.6; }
-  .info-block a { color: var(--color-burnt-orange); }
+  .info-block a { color: var(--color-brand-red); }
   .info-block a:hover { color: var(--color-amber-ink); }
 
   /* FORM */
@@ -95,7 +95,7 @@ import Base from "../layouts/Base.astro";
     color: var(--color-espresso);
     margin-bottom: var(--spacing-xs);
   }
-  .required { color: var(--color-burnt-orange); }
+  .required { color: var(--color-brand-red); }
   .form-group input, .form-group textarea {
     width: 100%;
     font-family: var(--font-body);
@@ -108,7 +108,7 @@ import Base from "../layouts/Base.astro";
   }
   .form-group input:focus, .form-group textarea:focus {
     outline: none;
-    border-color: var(--color-burnt-orange);
+    border-color: var(--color-brand-red);
   }
   .btn-submit {
     font-family: var(--font-mono);
@@ -116,7 +116,7 @@ import Base from "../layouts/Base.astro";
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    background: var(--color-burnt-orange);
+    background: var(--color-brand-red);
     color: var(--paper-fixed);
     border: none;
     border-radius: var(--radius);
@@ -127,7 +127,7 @@ import Base from "../layouts/Base.astro";
   .btn-submit:hover { background: var(--color-amber-ink); }
   .btn-submit:disabled { opacity: 0.6; cursor: default; }
   .form-status { margin-top: var(--spacing-md); font-family: var(--font-mono); font-size: var(--font-size-sm); }
-  .form-status.error { color: var(--color-burnt-orange); }
+  .form-status.error { color: var(--color-brand-red); }
   .form-status.success { color: #2e7d32; }
 
   @media (max-width: 800px) {

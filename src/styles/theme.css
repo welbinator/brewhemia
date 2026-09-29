@@ -28,8 +28,8 @@ html[data-theme="dark"] {
   --color-sandstone: #4a3d35;
   --color-coffee-dust: #b39a8f;          /* muted text -> lighter so it stays legible */
 
-  /* ---- Brand: brighten slightly so orange pops on dark ---- */
-  --color-burnt-orange: #ff5a2b;
+  /* ---- Brand: brighten the red so it pops on dark ---- */
+  --color-brand-red: #ff2b2b;
   --color-amber-ink: #ff8a3d;
   --color-marigold-wash: #febf6f;
 
@@ -71,7 +71,7 @@ html.theme-ready .page-banner {
   transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
   padding: 0;
 }
-.theme-toggle:hover { border-color: var(--color-burnt-orange); color: var(--color-burnt-orange); }
+.theme-toggle:hover { border-color: var(--color-brand-red); color: var(--color-brand-red); }
 .theme-toggle svg { width: 18px; height: 18px; display: block; }
 /* Show sun in dark mode (click -> go light), moon in light mode (click -> go dark) */
 .theme-toggle .icon-sun { display: none; }
