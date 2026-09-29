@@ -266,6 +266,22 @@ const reviews = [
   .btn-ghost.light { border-color: var(--paper-fixed); color: var(--paper-fixed); }
   .btn-ghost.light:hover { background: var(--paper-fixed); color: var(--ink-fixed); }
 
+  /* Hero buttons always sit on the dark image overlay — keep them white in BOTH themes */
+  .hero-actions .btn-ghost {
+    border-color: var(--paper-fixed);
+    color: var(--paper-fixed);
+    background: transparent;
+  }
+  .hero-actions .btn-ghost:hover {
+    background: var(--paper-fixed);
+    color: var(--ink-fixed);
+  }
+  .hero-actions .btn-primary {
+    background: var(--color-brand-red);
+    color: var(--paper-fixed);
+  }
+  .hero-actions .btn-primary:hover { background: var(--color-amber-ink); }
+
   /* ---------- TAGLINE STRIP ---------- */
   .tagline-strip {
     margin-top: var(--spacing-3xl);
