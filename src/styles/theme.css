@@ -22,8 +22,8 @@ html[data-theme="dark"] {
 
   /* ---- Neutrals: invert the paper/ink ramp ---- */
   --color-espresso: #f2e8e1;             /* primary text -> warm off-white */
-  --color-cream-paper: #0d0a08;          /* page background -> darker near-black espresso */
-  --color-linen-beige: #191310;          /* raised surface -> dark warm */
+  --color-cream-paper: #000000;          /* page background -> pure black */
+  --color-linen-beige: #0d0d0d;          /* raised surface -> near-black */
   --color-taupe-hairline: #3a2f28;       /* hairlines/borders -> dark warm */
   --color-sandstone: #4a3d35;
   --color-coffee-dust: #b39a8f;          /* muted text -> lighter so it stays legible */
